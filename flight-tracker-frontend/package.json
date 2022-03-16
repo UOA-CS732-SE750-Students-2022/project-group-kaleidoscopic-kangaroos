@@ -18,7 +18,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,jsx src",
     "lint:fix": "eslint --ext js,jsx src --fix",
-    "format": "prettier-eslint --write \"src/**/*.{js,jsx}\"" 
+    "format": "prettier-eslint --write \"src/**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -41,10 +41,16 @@
   "devDependencies": {
     "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-md": "^1.0.19",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.6",
+    "prettier": "^2.6.0",
     "prettier-eslint": "^13.0.0",
     "prettier-eslint-cli": "^5.0.1"
   }
