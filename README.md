@@ -20,7 +20,7 @@ https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
     "editor.formatOnSave": true
   }
   
-Should look like this:
+Should look something like this:
 ![image](https://user-images.githubusercontent.com/24401134/158567154-e87a1342-a434-4919-8b85-0efdab35bb62.png)
 
 5) Eslint and prettier should now be working.
