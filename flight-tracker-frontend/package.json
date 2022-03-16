@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,jsx src",
-    "lint:fix": "eslint --ext js,jsx src --fix"
+    "lint:fix": "eslint --ext js,jsx src --fix",
+    "format": "prettier-eslint --write \"src/**/*.{js,jsx}\"" 
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +44,8 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-react-hooks": "^4.3.0"
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier-eslint": "^13.0.0",
+    "prettier-eslint-cli": "^5.0.1"
   }
 }
