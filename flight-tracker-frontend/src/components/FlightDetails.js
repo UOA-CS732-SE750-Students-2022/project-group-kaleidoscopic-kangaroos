@@ -11,6 +11,7 @@ import plane from '../images/plane-placeholder.jpg'
 import '../styles/FlightDetails.css'
 
 const FlightDetails = () => {
+    // Temporary mock data until the API calls are implemented.
     const mockData = {
         callsign: 'Test123',
         altitude: 5182,
