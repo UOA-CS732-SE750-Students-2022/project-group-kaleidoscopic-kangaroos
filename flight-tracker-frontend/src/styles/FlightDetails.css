@@ -1,6 +1,11 @@
-.planeImage {
+.planeImageContainer {
     height: 150px;
-    width: 220px;
+    width: 400px;
+}
+
+.planeImage {
+    height: 100%;
+    width: 100%;
 }
 
 .flightDetailsDiv {
@@ -15,10 +20,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 20px;
+    align-items: center;
 }
 
 .buttonRow {
-    padding-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

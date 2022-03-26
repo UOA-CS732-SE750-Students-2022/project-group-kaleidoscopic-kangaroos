@@ -26,7 +26,7 @@ const FlightDetails = () => {
 
     return (
         <div>
-            <Card className="flightDetailsDiv">
+            <Card className="flightDetailsDiv" elevation={0}>
                 <div className="flightDetailsRow">
                     <Typography variant="h4">
                         Plane {flightState.callsign}
@@ -36,7 +36,7 @@ const FlightDetails = () => {
                     </IconButton>
                 </div>
                 <div className="flightDetailsRow">
-                    <Paper variant="outlined">
+                    <Paper variant="outlined" className="planeImageContainer">
                         <img src={plane} alt="a plane" className="planeImage" />
                     </Paper>
                     <Container>
