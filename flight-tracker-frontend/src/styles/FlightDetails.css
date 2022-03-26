@@ -1,4 +1,14 @@
 .planeImage {
-    width: 15%;
-    height: 15%;
+    height: 150px;
+    width: 220px;
+}
+
+.flightDetailsDiv {
+    width: 500px;
+}
+
+.flightDetailsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
