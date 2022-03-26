@@ -1,11 +1,21 @@
 import React from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import FlightDetails from './components/FlightDetails'
+
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+        background: { paper: '#222431' },
+    },
+})
 
 function App() {
     return (
-        <div className="App">
-            <FlightDetails />
-        </div>
+        <ThemeProvider theme={theme}>
+            <div className="App">
+                <FlightDetails />
+            </div>
+        </ThemeProvider>
     )
 }
 
