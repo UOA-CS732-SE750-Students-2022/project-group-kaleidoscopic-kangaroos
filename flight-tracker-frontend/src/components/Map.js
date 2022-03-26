@@ -1,5 +1,6 @@
 import React from 'react'
+import '../styles/Map.css'
 
-const Map = () => <div>Map testing...</div>
+const Map = () => <div className="mapBackground" />
 
 export default Map

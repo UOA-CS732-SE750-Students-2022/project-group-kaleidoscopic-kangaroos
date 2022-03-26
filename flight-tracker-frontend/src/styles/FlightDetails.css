@@ -6,6 +6,9 @@
 .flightDetailsDiv {
     width: 500px;
     padding: 2px 2px 16px 16px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
 
 .flightDetailsRow {
