@@ -63,11 +63,13 @@ const FlightDetails = () => {
                         </Typography>
                     </Container>
                 </div>
-                <Button>General</Button>
-                <Button>Spatial</Button>
-                <Button>Speed</Button>
-                <Button>Altitude</Button>
-                <Button>ATC Radio</Button>
+                <div className="buttonRow">
+                    <Button>General</Button>
+                    <Button>Spatial</Button>
+                    <Button>Speed</Button>
+                    <Button>Altitude</Button>
+                    <Button>ATC Radio</Button>
+                </div>
             </Card>
         </div>
     )
