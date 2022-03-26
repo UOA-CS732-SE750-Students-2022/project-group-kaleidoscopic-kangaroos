@@ -1,5 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button, Card, IconButton, Paper, Typography } from '@mui/material'
+import plane from '../images/plane-placeholder.jpg'
+import '../styles/FlightDetails.css'
 
-const FlightDetails = () => {}
+const FlightDetails = () => {
+    const mockData = {
+        callsign: 'Test123',
+        altitude: 5182,
+        vSpeed: 20,
+        hspeed: 420,
+        heading: 334.1,
+        distance: 18582.58,
+        squawk: 5565,
+        engines: 'Twin turbo',
+    }
+
+    const [flightState] = useState(mockData)
+
+    return (
+        <div>
+            <Card>
+                <Typography variant="h4">
+                    Plane {flightState.callsign}
+                </Typography>
+                <IconButton color="primary">
+                    <b>X</b>
+                </IconButton>
+                <Paper variant="outlined">
+                    <img className="planeImage" src={plane} alt="a plane" />
+                </Paper>
+
+                <Typography>
+                    <b>Altitude:</b> {flightState.altitude}m
+                </Typography>
+                <Typography>
+                    <b>Vertical Speed:</b> {flightState.vSpeed}m/min
+                </Typography>
+                <Typography>
+                    <b>Speed:</b> {flightState.hSpeed}km/hr
+                </Typography>
+                <Typography>
+                    <b>Heading:</b> {flightState.heading}&deg;
+                </Typography>
+                <Typography>
+                    <b>Distance:</b> {flightState.distance}km
+                </Typography>
+                <Typography>
+                    <b>Squawk:</b> {flightState.squawk}
+                </Typography>
+                <Typography>
+                    <b>Engines:</b> {flightState.engines}
+                </Typography>
+                <Button>General</Button>
+                <Button>Spatial</Button>
+                <Button>Speed</Button>
+                <Button>Altitude</Button>
+                <Button>ATC Radio</Button>
+            </Card>
+        </div>
+    )
+}
 
 export default FlightDetails

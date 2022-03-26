@@ -1,10 +1,10 @@
 import React from 'react'
-import Map from './components/Map'
+import FlightDetails from './components/FlightDetails'
 
 function App() {
     return (
         <div className="App">
-            <Map />
+            <FlightDetails />
         </div>
     )
 }
