@@ -1,0 +1,16 @@
+.flightListDiv {
+    width: 500px;
+    padding: 16px 2px 16px 16px;
+    position: fixed;
+    bottom: 0;
+    Left: 0;
+    z-index: 999;
+}
+
+.flightListRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    align-items: center;
+}
