@@ -1,6 +1,8 @@
 import React from 'react'
 import '../styles/Map.css'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
+import hotSpotData from './new_spots.json';
+
 
 const Map = () => <div className="mapBackground">
     <MapContainer center={[-41.5000831, 172.8344077]} zoom={13}>
@@ -8,6 +10,7 @@ const Map = () => <div className="mapBackground">
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+<<<<<<< Updated upstream
         <Marker position={[-37.0082, 174.7850]}>
             <Popup>
             Auckland International Airport <br /> NewZealnd.
@@ -98,7 +101,23 @@ const Map = () => <div className="mapBackground">
             Whangarei International Airport. <br /> Newzealand.
             </Popup>
         </Marker>
+=======
+         {
+             hotSpotData.map(hotspot => (
+               <Marker 
+                  key={hotspot.name}
+                  position={[hotspot.lat, hotspot.lon]}
+                >
+                  <Popup><h4>{hotspot.name}</h4></Popup>
+                </Marker>
+                
+             ))
+           }
+>>>>>>> Stashed changes
     </MapContainer>
+
+
+
     </div>
 
 
