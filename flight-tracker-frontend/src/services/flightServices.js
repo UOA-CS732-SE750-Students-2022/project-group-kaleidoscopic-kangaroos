@@ -26,7 +26,7 @@ async function getAllFlights() {
                 flights[rawflight.Reg] = rawflight
             }
         })
-        // console.log(flight)
+        // console.log(flights)
         // console.log(Object.keys(flight))
         return flights
     } catch (error) {
@@ -55,4 +55,5 @@ async function getFlightDetails(aircraftrego) {
     }
 }
 
+export default getAllFlights
 export { getAllFlights, getFlightDetails }

@@ -1,28 +1,44 @@
-import { Card } from '@mui/material'
-import getAllFlights from '../services/flightServices'
+// TODO
+// - Auto refresh the list
+// - Finnish Row Generation
+// - Card Builder
 
-function getFlightListRow(flights) {
-    console.log(flights)
-    return (
-        <div className="flightListRow">
-            <div className="flightListRow">flights</div>
-        </div>
-    )
+import { Card } from '@mui/material'
+import { getAllFlights } from '../services/flightServices'
+
+// function makeFlightListRow(aircraft) {
+//     return (
+//         <div className="flightListRow">
+//             Callsign: {aircraft.call}, Altitude: {aircraft.altitude}, Vertical
+//             Speed: {aircraft.vSpeed}, Speed: {aircraft.hSpeed}, Heading:{' '}
+//             {aircraft.heading}, Distance: {aircraft.distance}, Squawk:{' '}
+//             {aircraft.squawk}, Engines: {aircraft.engines}
+//         </div>
+//     )
+// }
+
+let aircraft = {}
+let keys = []
+
+function fetchAircraftInfo() {
+    getAllFlights().then((res) => {
+        aircraft = res
+        keys = Object.keys(res)
+        console.log('function')
+        console.log(aircraft)
+        console.log(keys)
+    })
 }
 
 const FlightList = () => {
-    const flights = getAllFlights()
-        .then()
-        .forEach((aircraft) => {
-            getFlightListRow(aircraft)
-        })
-
-    console.log.apply(flights)
-
+    fetchAircraftInfo()
+    console.log('main')
+    console.log(aircraft)
+    console.log(keys)
     return (
         <div>
             <Card className="flightListDiv" elevation={0}>
-                <div className="flightListRow">Hellomoto!</div>
+                <div className="flightListRow">Hello moto {keys} </div>
             </Card>
         </div>
     )
