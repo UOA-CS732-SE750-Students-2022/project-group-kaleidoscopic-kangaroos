@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Aircraft List API
+When working with data that has come from the base server API, the required documentation can be found here: [https://www.virtualradarserver.co.uk/Documentation/Formats/AircraftList.aspx](https://www.virtualradarserver.co.uk/Documentation/Formats/AircraftList.aspx)
+
+The URL for the AircraftList.json API is [https://aircraft.freeth.kiwi/VirtualRadar/AircraftList.json](https://aircraft.freeth.kiwi/VirtualRadar/AircraftList.json)
+
+This doc should be read by anyone that is using data from this API
