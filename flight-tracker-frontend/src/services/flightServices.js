@@ -40,7 +40,7 @@ async function getAllFlights() {
 async function getFlightDetails(aircraftrego) {
     try {
         const foundFlight = {}
-        const allFlights = await getAllFlights().then()
+        const allFlights = getAllFlights().then()
         if (allFlights[aircraftrego]) {
             // console.log('FOUND VIA REGO')
             // console.log(allFlights[aircraftrego])
