@@ -10,17 +10,19 @@ import {
 import plane from '../images/plane-placeholder.jpg'
 import '../styles/FlightDetails.css'
 
-const FlightDetails = () => {
+const FlightDetails = (props) => {
+    const flightData = props
+
     // Temporary mock data until the API calls are implemented.
     const mockData = {
-        callsign: 'Test123',
-        altitude: 5182,
+        callsign: flightData.Call,
+        altitude: flightData.Alt,
         vSpeed: 20,
-        hspeed: 420,
+        hspeed: flightData.Spd,
         heading: 334.1,
         distance: 18582.58,
-        squawk: 5565,
-        engines: 'Twin turbo',
+        squawk: flightData.Sqk,
+        engines: flightData.Engines,
     }
 
     const [flightState] = useState(mockData)

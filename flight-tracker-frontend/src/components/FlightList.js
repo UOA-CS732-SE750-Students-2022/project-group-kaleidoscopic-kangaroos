@@ -4,6 +4,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { FixedSizeList } from 'react-window'
+import getAllFlights from '../services/flightServices'
 
 let tempData = []
 
@@ -22,35 +23,54 @@ function renderRow(props) {
     )
 }
 
-function FlightList(props) {
-    const allFlights = props
-    tempData = allFlights.data
-    console.log(allFlights.data)
-    return (
-        <Box
-            index="FlightListBox"
-            sx={{
-                width: '100%',
-                height: 400,
-                maxWidth: 360,
-                bgcolor: 'background.paper',
-                position: 'fixed',
-                top: '0',
-                left: '0',
-                zIndex: '999',
-            }}
-        >
-            <FixedSizeList
-                height={400}
-                width={360}
-                itemSize={46}
-                itemCount={allFlights.data.length}
-                overscanCount={5}
+function FlightList() {
+    const [isLoading, setLoading] = React.useState(true)
+
+    const getAllNodes = () => {
+        getAllFlights().then((result) => {
+            tempData = result
+            tempData.pop()
+            setLoading(false)
+        })
+    }
+
+    React.useEffect(() => {
+        setInterval(() => {
+            setLoading(true)
+        }, 3000)
+    }, [])
+
+    if (isLoading) {
+        getAllNodes()
+        return <div className="App">Loading...</div>
+    }
+    if (isLoading === false) {
+        return (
+            <Box
+                index="FlightListBox"
+                sx={{
+                    width: '100%',
+                    height: 400,
+                    maxWidth: 360,
+                    bgcolor: 'background.paper',
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    zIndex: '999',
+                }}
             >
-                {renderRow}
-            </FixedSizeList>
-        </Box>
-    )
+                <FixedSizeList
+                    height={400}
+                    width={360}
+                    itemSize={46}
+                    itemCount={tempData.length}
+                    overscanCount={5}
+                >
+                    {renderRow}
+                </FixedSizeList>
+            </Box>
+        )
+    }
 }
 
 export default FlightList

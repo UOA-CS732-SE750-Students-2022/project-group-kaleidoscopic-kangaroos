@@ -1,8 +1,10 @@
 import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet'
 import Map from './components/Map'
 import FlightList from './components/FlightList'
-import getAllFlights from './services/flightServices'
+
+const position = [-37.0082, 174.785]
 
 const theme = createTheme({
     palette: {
@@ -11,31 +13,22 @@ const theme = createTheme({
     },
 })
 
-let allFlights = []
-
 function App() {
-    const [isLoading, setLoading] = React.useState(true)
-
-    const getAllNodes = () => {
-        getAllFlights().then((result) => {
-            allFlights = result
-            allFlights.pop()
-            console.log(allFlights)
-            setLoading(false)
-        })
-    }
-    React.useEffect(() => {
-        getAllNodes()
-    }, [])
-
-    if (isLoading) {
-        return <div className="App">Loading...</div>
-    }
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                <Map data={allFlights} />
-                <FlightList data={allFlights} />
+                <div className="mapBackground">
+                    <MapContainer
+                        center={position}
+                        zoom={10}
+                        zoomControl={false}
+                    >
+                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                        <Map />
+                        <ZoomControl position="topright" />
+                    </MapContainer>
+                    <FlightList />
+                </div>
             </div>
         </ThemeProvider>
     )

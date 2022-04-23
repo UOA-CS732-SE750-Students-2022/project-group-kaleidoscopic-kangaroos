@@ -1,76 +1,96 @@
 import React, { useState } from 'react'
 import '../styles/Map.css'
-import {
-    MapContainer,
-    TileLayer,
-    Marker,
-    Popup,
-    ZoomControl,
-} from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import planeIcon from '../images/plane-up-solid.svg'
-import FlightDetails from './FlightDetails'
-
-const position = [-37.0082, 174.785]
+import getAllFlights from '../services/flightServices'
+import FlightList from './FlightList'
 
 const newicon = new L.Icon({
     iconUrl: planeIcon,
     iconSize: [55, 55],
 })
 
-function Map(props) {
-    const allFlights = props
-    console.log(allFlights.data)
+let allFlights = []
+
+let currentPlane
+
+function Map() {
+    const [isLoading, setLoading] = React.useState(true)
+
+    const getAllNodes = () => {
+        getAllFlights().then((result) => {
+            allFlights = result
+            allFlights.pop()
+            console.log(allFlights)
+            setLoading(false)
+        })
+    }
 
     const [displayDetails, setDisplayDetails] = useState(false)
 
-    if (displayDetails) {
+    function changeDisplayDetails(newProps) {
+        currentPlane = newProps
+        console.log(currentPlane)
+        setDisplayDetails(!displayDetails)
+    }
+
+    React.useEffect(() => {
+        setInterval(() => {
+            setLoading(true)
+        }, 3000)
+    }, [])
+
+    if (isLoading) {
+        getAllNodes()
+        return <div className="App">Loading...</div>
+    }
+    if (isLoading === false) {
+        if (displayDetails) {
+            return (
+                <>
+                    {allFlights.map((item) =>
+                        item.Lat ? (
+                            <Marker
+                                key={item.Id}
+                                position={[item.Lat, item.Long]}
+                                icon={newicon}
+                            >
+                                <Popup
+                                    onOpen={() => changeDisplayDetails(item)}
+                                >
+                                    A pretty CSS3 popup. <br /> Easily
+                                    customizable.
+                                </Popup>
+                            </Marker>
+                        ) : (
+                            <div />
+                        )
+                    )}
+                    <FlightList data={currentPlane} />
+                </>
+            )
+        }
         return (
-            <div className="mapBackground">
-                <MapContainer center={position} zoom={13} zoomControl={false}>
-                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                    {allFlights.data.map((item) => (
+            <>
+                {allFlights.map((item) =>
+                    item.Lat ? (
                         <Marker
                             key={item.Id}
                             position={[item.Lat, item.Long]}
                             icon={newicon}
                         >
-                            <Popup
-                                onOpen={() =>
-                                    setDisplayDetails(!displayDetails)
-                                }
-                            >
+                            <Popup onOpen={() => changeDisplayDetails(item)}>
                                 A pretty CSS3 popup. <br /> Easily customizable.
                             </Popup>
                         </Marker>
-                    ))}
-                    <ZoomControl position="topright" />
-                </MapContainer>
-                <FlightDetails />
-            </div>
+                    ) : (
+                        <div />
+                    )
+                )}
+            </>
         )
     }
-    return (
-        <div className="mapBackground">
-            <MapContainer center={position} zoom={13} zoomControl={false}>
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                {allFlights.data.map((item) => (
-                    <Marker
-                        key={item.Id}
-                        position={[item.Lat, item.Long]}
-                        icon={newicon}
-                    >
-                        <Popup
-                            onOpen={() => setDisplayDetails(!displayDetails)}
-                        >
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
-                ))}
-                <ZoomControl position="topright" />
-            </MapContainer>
-        </div>
-    )
 }
 
 export default Map
