@@ -5,8 +5,9 @@ async function getAllFlights() {
         const response = await axios.get(
             'https://aircraft.freeth.kiwi/VirtualRadar/AircraftList.json'
         )
-        console.log(response)
-        return response.data.acList
+        const returnObject = []
+        response.data.acList.forEach((item) => returnObject.push(item))
+        return returnObject
     } catch (error) {
         console.error(error)
         return null

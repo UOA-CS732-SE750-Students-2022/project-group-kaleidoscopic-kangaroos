@@ -9,7 +9,6 @@ import {
 } from '@mui/material'
 import plane from '../images/plane-placeholder.jpg'
 import '../styles/FlightDetails.css'
-import getAllFlights from '../services/flightServices'
 
 const FlightDetails = () => {
     // Temporary mock data until the API calls are implemented.
@@ -25,8 +24,6 @@ const FlightDetails = () => {
     }
 
     const [flightState] = useState(mockData)
-
-    getAllFlights()
 
     return (
         <div>

@@ -1,0 +1,32 @@
+.planeImageContainer {
+    height: 150px;
+    width: 400px;
+}
+
+.planeImage {
+    height: 100%;
+    width: 100%;
+}
+
+.flightListDiv {
+    width: 500px;
+    padding: 16px 2px 16px 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.flightListRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    align-items: center;
+}
+
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
