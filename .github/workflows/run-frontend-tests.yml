@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./frontend/
+        working-directory: ./flight-tracker-frontend/
 
     env:
       CI: "false"
