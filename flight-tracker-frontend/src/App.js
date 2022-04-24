@@ -24,7 +24,10 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                <Map />
+                <Map 
+                center={[-41.5000831, 172.8344077]} 
+                zoom={13}
+                />
                 <FlightDetails 
                 details={mockState}
                 />
