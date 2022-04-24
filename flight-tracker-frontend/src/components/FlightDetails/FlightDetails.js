@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import {
     Button,
     Card,
@@ -10,27 +9,12 @@ import {
 import plane from '../../images/plane-placeholder.jpg'
 import './FlightDetails.css'
 
-const FlightDetails = () => {
-    // Temporary mock data until the API calls are implemented.
-    const mockData = {
-        callsign: 'Test123',
-        altitude: 5182,
-        vSpeed: 20,
-        hspeed: 420,
-        heading: 334.1,
-        distance: 18582.58,
-        squawk: 5565,
-        engines: 'Twin turbo',
-    }
-
-    const [flightState] = useState(mockData)
-
-    return (
+const FlightDetails = ({details}) => (
         <div>
             <Card className="flightDetailsDiv" elevation={0}>
                 <div className="flightDetailsRow">
                     <Typography variant="h4">
-                        Plane {flightState.callsign}
+                        Plane {details.callsign}
                     </Typography>
                     <IconButton color="primary">
                         <b>X</b>
@@ -42,25 +26,25 @@ const FlightDetails = () => {
                     </Paper>
                     <Container>
                         <Typography>
-                            <b>Altitude:</b> {flightState.altitude}m
+                            <b>Altitude:</b> {details.altitude}m
                         </Typography>
                         <Typography>
-                            <b>Vertical Speed:</b> {flightState.vSpeed}m/min
+                            <b>Vertical Speed:</b> {details.vSpeed}m/min
                         </Typography>
                         <Typography>
-                            <b>Speed:</b> {flightState.hSpeed}km/hr
+                            <b>Speed:</b> {details.hSpeed}km/hr
                         </Typography>
                         <Typography>
-                            <b>Heading:</b> {flightState.heading}&deg;
+                            <b>Heading:</b> {details.heading}&deg;
                         </Typography>
                         <Typography>
-                            <b>Distance:</b> {flightState.distance}km
+                            <b>Distance:</b> {details.distance}km
                         </Typography>
                         <Typography>
-                            <b>Squawk:</b> {flightState.squawk}
+                            <b>Squawk:</b> {details.squawk}
                         </Typography>
                         <Typography>
-                            <b>Engines:</b> {flightState.engines}
+                            <b>Engines:</b> {details.engines}
                         </Typography>
                     </Container>
                 </div>
@@ -74,6 +58,5 @@ const FlightDetails = () => {
             </Card>
         </div>
     )
-}
 
 export default FlightDetails
