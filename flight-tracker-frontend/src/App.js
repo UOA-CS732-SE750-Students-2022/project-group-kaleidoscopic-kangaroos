@@ -14,7 +14,7 @@ function App() {
         callsign: 'Test123',
         altitude: 5182,
         vSpeed: 20,
-        hspeed: 420,
+        hSpeed: 420,
         heading: 334.1,
         distance: 18582.58,
         squawk: 5565,
