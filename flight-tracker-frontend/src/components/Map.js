@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/Map.css'
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
-import hotSpotData from '../Data/newSpots.json';
+import hotSpotData from '../data/newSpots.json';
 
 
 const Map = () => <div className="mapBackground">
