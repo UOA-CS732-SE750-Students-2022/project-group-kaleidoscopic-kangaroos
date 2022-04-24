@@ -1,7 +1,7 @@
 import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import Map from './components/Map'
-import FlightDetails from './components/FlightDetails'
+import Map from './components/Map/Map'
+import FlightDetails from './components/FlightDetails/FlightDetails'
 
 const theme = createTheme({
     palette: {
