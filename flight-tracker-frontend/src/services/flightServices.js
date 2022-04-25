@@ -55,5 +55,5 @@ async function getFlightDetails(aircraftrego) {
     }
 }
 
-export default getAllFlights
 export { getAllFlights, getFlightDetails }
+export default getAllFlights

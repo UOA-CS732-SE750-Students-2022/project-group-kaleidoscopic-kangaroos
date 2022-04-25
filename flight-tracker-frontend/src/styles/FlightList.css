@@ -14,3 +14,9 @@
     padding-bottom: 20px;
     align-items: center;
 }
+
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

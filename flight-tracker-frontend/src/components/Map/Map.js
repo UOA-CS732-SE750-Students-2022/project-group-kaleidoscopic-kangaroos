@@ -1,35 +1,18 @@
-/* eslint-disable arrow-body-style */
 import React from 'react'
 import './Map.css'
-import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
-import hotSpotData from '../../data/newSpots.json';
+import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet'
+import Planes from '../Planes'
 
+const position = [-37.0082, 174.785]
 
-const Map = ({center, zoom}) => {
-  return (
-    <div className="mapBackground">
-    <MapContainer center={center} zoom={zoom}>
-      <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-
-      {
-        hotSpotData.map(hotspot => (
-          <Marker 
-            key={hotspot.name}
-            position={[hotspot.lat, hotspot.lon]}
-          >
-            <Popup><h4>{hotspot.name}</h4></Popup>
-          </Marker>
-        ))
-      }
-    </MapContainer>
-  </div>
-  );
+function Map() {
+    return (
+        <MapContainer center={position} zoom={10} zoomControl={false}>
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <Planes />
+            <ZoomControl position="topright" />
+        </MapContainer>
+    )
 }
-  
 
-
-
-export default Map;
+export default Map
