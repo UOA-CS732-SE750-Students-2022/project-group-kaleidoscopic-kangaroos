@@ -1,6 +1,7 @@
 import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Map from './components/Map'
+import FlightDetails from './components/FlightDetails'
 import FlightList from './components/FlightList'
 
 const theme = createTheme({
@@ -17,6 +18,7 @@ function App() {
                 <div className="mapBackground">
                     <Map />
                     <FlightList />
+                    <FlightDetails />
                 </div>
             </div>
         </ThemeProvider>
