@@ -14,18 +14,19 @@ const FlightDetails = (props) => {
     const flightData = props
 
     // Temporary mock data until the API calls are implemented.
-    const mockData = {
-        callsign: flightData.Call,
-        altitude: flightData.Alt,
-        vSpeed: 20,
-        hspeed: flightData.Spd,
-        heading: 334.1,
-        distance: 18582.58,
-        squawk: flightData.Sqk,
-        engines: flightData.Engines,
+
+    const data = {
+        callsign: flightData.data.Call,
+        altitude: Math.round(flightData.data.Alt / 3.2808),
+        vSpeed: '',
+        hSpeed: Math.round(flightData.data.Spd * 1.60934),
+        heading: flightData.data.Trak,
+        distance: '',
+        squawk: flightData.data.Sqk,
+        engines: flightData.data.Engines,
     }
 
-    const [flightState] = useState(mockData)
+    const [flightState] = useState(data)
 
     return (
         <div>

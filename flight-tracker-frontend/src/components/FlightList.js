@@ -42,7 +42,31 @@ function FlightList() {
 
     if (isLoading) {
         getAllNodes()
-        return <div className="App">Loading...</div>
+        return (
+            <Box
+                index="FlightListBox"
+                sx={{
+                    width: '100%',
+                    height: 400,
+                    maxWidth: 360,
+                    bgcolor: 'background.paper',
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    zIndex: '999',
+                }}
+            >
+                <FixedSizeList
+                    height={400}
+                    width={360}
+                    itemSize={46}
+                    itemCount={tempData.length}
+                    overscanCount={5}
+                >
+                    {renderRow}
+                </FixedSizeList>
+            </Box>
+        )
     }
     if (isLoading === false) {
         return (

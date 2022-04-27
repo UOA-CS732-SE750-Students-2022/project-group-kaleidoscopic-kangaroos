@@ -2,20 +2,22 @@ import React from 'react'
 import '../styles/Map.css'
 import { Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
-import planeIcon from '../images/plane-up-solid.svg'
 import getAllFlights from '../services/flightServices'
-import FlightDetails from './FlightDetails'
-
-const newicon = new L.Icon({
-    iconUrl: planeIcon,
-    iconSize: [55, 55],
-})
+import DisplayContext from '../DisplayContext'
 
 let allFlights = []
 
-let currentPlane
-
 function Planes() {
+    const display = React.useContext(DisplayContext)
+
+    function handleDisplayUpdate(props) {
+        if (display.displayDetails) {
+            display.changeDisplayEvent('NO_FLIGHTDETAILS', props)
+        } else {
+            display.changeDisplayEvent('YES_FLIGHTDETAILS', props)
+        }
+    }
+
     const [isLoading, setLoading] = React.useState(true)
 
     const getAllNodes = () => {
@@ -27,14 +29,6 @@ function Planes() {
         })
     }
 
-    const [displayDetails, setDisplayDetails] = React.useState(false)
-
-    function changeDisplayDetails(newProps) {
-        currentPlane = newProps
-        console.log(currentPlane)
-        setDisplayDetails(!displayDetails)
-    }
-
     React.useEffect(() => {
         setInterval(() => {
             setLoading(true)
@@ -43,34 +37,6 @@ function Planes() {
 
     if (isLoading) {
         getAllNodes()
-        return <div className="App">Loading...</div>
-    }
-    if (isLoading === false) {
-        if (displayDetails) {
-            return (
-                <>
-                    {allFlights.map((item) =>
-                        item.Lat ? (
-                            <Marker
-                                key={item.Id}
-                                position={[item.Lat, item.Long]}
-                                icon={newicon}
-                            >
-                                <Popup
-                                    onOpen={() => changeDisplayDetails(item)}
-                                >
-                                    A pretty CSS3 popup. <br /> Easily
-                                    customizable.
-                                </Popup>
-                            </Marker>
-                        ) : (
-                            <div />
-                        )
-                    )}
-                    <FlightDetails data={currentPlane} />
-                </>
-            )
-        }
         return (
             <>
                 {allFlights.map((item) =>
@@ -78,9 +44,48 @@ function Planes() {
                         <Marker
                             key={item.Id}
                             position={[item.Lat, item.Long]}
-                            icon={newicon}
+                            icon={L.divIcon({
+                                iconSize: [40, 40],
+                                iconAnchor: [10, 10],
+                                className: 'yourClassName',
+                                html: `<img 
+            style="transform: rotate(${item.Trak}deg);"
+            height="40" 
+            width="40"
+            src='/plane-up-solid.svg'>`,
+                            })}
                         >
-                            <Popup onOpen={() => changeDisplayDetails(item)}>
+                            <Popup onOpen={() => handleDisplayUpdate(item)}>
+                                A pretty CSS3 popup. <br /> Easily customizable.
+                            </Popup>
+                        </Marker>
+                    ) : (
+                        <div />
+                    )
+                )}
+            </>
+        )
+    }
+    if (isLoading === false) {
+        return (
+            <>
+                {allFlights.map((item) =>
+                    item.Lat ? (
+                        <Marker
+                            key={item.Id}
+                            position={[item.Lat, item.Long]}
+                            icon={L.divIcon({
+                                iconSize: [40, 40],
+                                iconAnchor: [10, 10],
+                                className: 'yourClassName',
+                                html: `<img 
+            style="transform: rotate(${item.Trak}deg);"
+            height="40" 
+            width="40"
+            src='/plane-up-solid.svg'>`,
+                            })}
+                        >
+                            <Popup onOpen={() => handleDisplayUpdate(item)}>
                                 A pretty CSS3 popup. <br /> Easily customizable.
                             </Popup>
                         </Marker>
