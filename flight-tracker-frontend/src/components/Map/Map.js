@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import '../styles/Map.css'
+import './Map.css'
 import {
     MapContainer,
     TileLayer,
@@ -7,10 +7,10 @@ import {
     Marker,
     Popup,
 } from 'react-leaflet'
-import Planes from './Planes'
-import FlightDetails from './FlightDetails'
-import DisplayContext from '../DisplayContext'
-import hotSpotData from '../Data/newSpots.json'
+import Planes from './Planes/Planes'
+import FlightDetails from '../FlightDetails/FlightDetails'
+import DisplayContext from '../../contexts/DisplayContext'
+import hotSpotData from '../../data/newSpots.json'
 
 const position = [-37.0082, 174.785]
 

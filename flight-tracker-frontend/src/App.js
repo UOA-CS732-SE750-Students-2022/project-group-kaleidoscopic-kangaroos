@@ -1,8 +1,8 @@
 import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import Map from './components/Map'
-import FlightList from './components/FlightList'
-import DisplayContext from './DisplayContext'
+import Map from './components/Map/Map'
+import FlightList from './components/FlightList/FlightList'
+import DisplayContext from './contexts/DisplayContext'
 
 const theme = createTheme({
     palette: {
@@ -45,8 +45,9 @@ function App() {
                     <DisplayContext.Provider value={DisplayProviderValue}>
                         <Map />
                     </DisplayContext.Provider>
-
-                    <FlightList />
+                    <DisplayContext.Provider value={DisplayProviderValue}>
+                        <FlightList />
+                    </DisplayContext.Provider>
                 </div>
             </div>
         </ThemeProvider>

@@ -7,13 +7,11 @@ import {
     Paper,
     Typography,
 } from '@mui/material'
-import plane from '../images/plane-placeholder.jpg'
-import '../styles/FlightDetails.css'
+import plane from '../../images/plane-placeholder.jpg'
+import './FlightDetails.css'
 
 const FlightDetails = (props) => {
     const flightData = props
-
-    // Temporary mock data until the API calls are implemented.
 
     const data = {
         callsign: flightData.data.Call,
