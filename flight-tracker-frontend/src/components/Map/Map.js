@@ -2,7 +2,7 @@
 import React from 'react'
 import './Map.css'
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
-import hotSpotData from '../../data/newSpots.json';
+import hotSpotData from '../../data/airports.json';
 
 
 const Map = ({center, zoom}) => {
