@@ -3,7 +3,7 @@
         "browser": true,
         "es2021": true,
         "jest": true
-    },    
+    },
     "extends": [
         "airbnb",
         "prettier",
@@ -20,7 +20,6 @@
         "react"
     ],
     "rules": {
-        "import/no-named-as-default": 0,
         "react/prop-types": "off",
         "react/function-component-definition": "off",
         "jsx-a11y/label-has-associated-control": "off",
