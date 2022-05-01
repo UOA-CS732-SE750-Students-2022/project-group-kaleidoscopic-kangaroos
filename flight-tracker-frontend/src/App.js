@@ -1,6 +1,8 @@
+import React from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
+import MenuAndSettings from './components/MenuAndSettings/MenuAndSettings'
 
 const theme = createTheme({
     palette: {
@@ -20,6 +22,15 @@ function App() {
         squawk: 5565,
         engines: 'Twin turbo',
     }
+    const [anchorEl, setAnchorEl] = React.useState(null);
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+    
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -30,6 +41,13 @@ function App() {
                 />
                 <FlightDetails 
                 details={mockState}
+                />
+                < MenuAndSettings
+                details1={handleClose}
+                details2={handleClick}
+                details3={anchorEl}
+                details4={setAnchorEl}
+                
                 />
             </div>
         </ThemeProvider>
