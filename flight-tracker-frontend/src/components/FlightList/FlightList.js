@@ -17,7 +17,7 @@ import Logo from '../../images/airlineLogo-placeholder.png'
 
 let tempData = []
 
-function renderRow(props) {
+function FlightListRows(props) {
     const { index, style } = props
 
     const display = React.useContext(DisplayContext)
@@ -105,7 +105,7 @@ function FlightList() {
                 itemCount={tempData.length}
                 overscanCount={5}
             >
-                {renderRow}
+                {FlightListRows}
             </FixedSizeList>
         </Box>
     )
