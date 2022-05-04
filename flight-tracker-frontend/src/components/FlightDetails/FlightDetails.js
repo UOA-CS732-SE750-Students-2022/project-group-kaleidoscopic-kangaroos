@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import {
     Button,
     Card,
@@ -9,14 +10,15 @@ import {
 import plane from '../../images/plane-placeholder.jpg'
 import './FlightDetails.css'
 
-const FlightDetails = ({details}) => (
+const FlightDetails = ({details, setVisible}) => {
+    return (
         <div>
             <Card className="flightDetailsDiv" elevation={0}>
                 <div className="flightDetailsRow">
                     <Typography variant="h4">
                         Plane {details.callsign}
                     </Typography>
-                    <IconButton color="primary">
+                    <IconButton color="primary" onClick={() => setVisible(false)}>
                         <b>X</b>
                     </IconButton>
                 </div>
@@ -57,6 +59,7 @@ const FlightDetails = ({details}) => (
                 </div>
             </Card>
         </div>
-    )
+        );
+    }
 
 export default FlightDetails
