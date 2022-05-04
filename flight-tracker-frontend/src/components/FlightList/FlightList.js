@@ -97,6 +97,8 @@ const FlightList = ({setVisible, setDetailsVisible, setDetails}) => {
                     bottom: '10%',
                     left: '0',
                     zIndex: '999',
+                    borderTopRightRadius: 8,
+                    borderBottomRightRadius: 8,
                 }}
             >
                 <div className="flightListTitleRow">
