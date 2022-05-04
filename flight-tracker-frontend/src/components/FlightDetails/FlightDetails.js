@@ -1,6 +1,7 @@
 /* eslint-disable arrow-body-style */
 import {
-    Button,
+    ToggleButtonGroup,
+    ToggleButton,
     Card,
     Container,
     IconButton,
@@ -11,6 +12,7 @@ import React, {useState} from 'react'
 import plane from '../../images/plane-placeholder.jpg'
 import './FlightDetails.css'
 
+// Shows General information about the plane.
 const GeneralPanel = ({details}) => {
     return (
         <div className="flightDetailsRow">
@@ -44,6 +46,7 @@ const GeneralPanel = ({details}) => {
     );
 }
 
+// Shows Spatial information about the plane.
 const SpatialPanel = ({details}) => {
     return (
         <div className="flightDetailsRow">
@@ -62,6 +65,7 @@ const SpatialPanel = ({details}) => {
     );
 }
 
+// Shows the speed of the plane.
 const SpeedPanel = ({details}) => {
     return (
         <div className="flightDetailsRow">
@@ -77,6 +81,7 @@ const SpeedPanel = ({details}) => {
     );
 }
 
+// Shows Altitude information about the plane.
 const AltitudePanel = ({details}) => {
     return (
         <div className="flightDetailsRow">
@@ -89,6 +94,7 @@ const AltitudePanel = ({details}) => {
     );
 }
 
+// Shows radio information about the plane.
 const AtcRadioPanel = () => {
     return (
         <div className="flightDetailsRow">
@@ -104,9 +110,18 @@ const AtcRadioPanel = () => {
 const FlightDetails = ({details, setVisible}) => {
     const [selectedPanel, setSelectedPanel] = useState("General");
 
+    /**
+     * Used to change the currently selected panel.
+     * @param {*} event 
+     * @param {String} panelName the name of the panel we want to switch to.
+     */
+    const handleSelectedPanel = (event, panelName) => {
+        setSelectedPanel(panelName);
+    }
+
     let contents;
 
-    // Decide which panel to display
+    // Decide which panel to display.
     if (selectedPanel === "General") {
         contents = <GeneralPanel details={details} />;
     }
@@ -123,6 +138,7 @@ const FlightDetails = ({details, setVisible}) => {
         contents = <AtcRadioPanel details={details} />;
     }
 
+    // Render the components.
     return (
         <div>
             <Card className="flightDetailsDiv" elevation={0}>
@@ -135,33 +151,37 @@ const FlightDetails = ({details, setVisible}) => {
                     </IconButton>
                 </div>
                 {contents}
-                <div className="buttonRow">
-                    <Button 
-                        onClick={() => setSelectedPanel("General")}
-                        className={selectedPanel === "General" ? "selectedButton" : null }>
+                <ToggleButtonGroup
+                    value={selectedPanel}
+                    exclusive
+                    onChange={handleSelectedPanel}
+                >
+                    <ToggleButton 
+                        value="General"
+                    >
                         General
-                    </Button>
-                    <Button 
-                        onClick={() => setSelectedPanel("Spatial")}
-                        className={selectedPanel === "Spatial" ? "selectedButton" : null }>
+                    </ToggleButton>
+                    <ToggleButton 
+                        value="Spatial"
+                    >
                         Spatial
-                    </Button>
-                    <Button 
-                        onClick={() => setSelectedPanel("Speed")}
-                        className={selectedPanel === "Speed" ? "selectedButton" : null }>
+                    </ToggleButton >
+                    <ToggleButton 
+                        value="Speed"
+                    >
                         Speed
-                    </Button>
-                    <Button 
-                        onClick={() => setSelectedPanel("Altitude")}
-                        className={selectedPanel === "Altitude" ? "selectedButton" : null }>
+                    </ToggleButton >
+                    <ToggleButton  
+                        value="Altitude"
+                    >
                         Altitude
-                    </Button>
-                    <Button 
-                        onClick={() => setSelectedPanel("ATC")}
-                        className={selectedPanel === "ATC" ? "selectedButton" : null }>
+                    </ToggleButton >
+                    <ToggleButton  
+                        value="ATC"
+                    >
                         ATC Radio
-                    </Button>
-                </div>
+                    </ToggleButton>
+                </ToggleButtonGroup>
             </Card>
         </div>
         );
