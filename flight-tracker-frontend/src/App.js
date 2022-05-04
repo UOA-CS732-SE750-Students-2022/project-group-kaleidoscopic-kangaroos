@@ -1,7 +1,9 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useState } from 'react'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import FlightList from './components/FlightList/FlightList'
+
 
 const theme = createTheme({
     palette: {
@@ -22,12 +24,18 @@ function App() {
         engines: 'Twin turbo',
     }
 
+    const [showFlightDetails, setShowFlightDetails] = useState(true);
+
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                <Map center={[-41.5000831, 172.8344077]} zoom={13} />
+                <Map 
+                center={[-41.5000831, 172.8344077]} 
+                zoom={13}
+                />
                 <FlightList />
-                <FlightDetails details={mockState} />
+                {showFlightDetails ?
+                <FlightDetails details={mockState} setVisible={setShowFlightDetails} /> : null}
             </div>
         </ThemeProvider>
     )
