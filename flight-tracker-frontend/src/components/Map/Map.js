@@ -10,7 +10,7 @@ import {
 import Planes from './Planes/Planes'
 import FlightDetails from '../FlightDetails/FlightDetails'
 import DisplayContext from '../../contexts/DisplayContext'
-import hotSpotData from '../../Data/newSpots.json'
+import hotSpotData from '../../data/newSpots.json'
 
 const position = [-37.0082, 174.785]
 
