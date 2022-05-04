@@ -4,6 +4,7 @@ import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import FlightList from './components/FlightList/FlightList'
 
+
 const theme = createTheme({
     palette: {
         mode: 'dark',
@@ -39,6 +40,7 @@ function App() {
             engines: 'Twin turbo',
         }
     }
+
 
     return (
         <ThemeProvider theme={theme}>
