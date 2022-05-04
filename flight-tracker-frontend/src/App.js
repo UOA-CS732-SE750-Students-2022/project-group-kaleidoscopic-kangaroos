@@ -1,8 +1,8 @@
-import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useState } from 'react'
 import Map from './components/Map/Map'
+import FlightDetails from './components/FlightDetails/FlightDetails'
 import FlightList from './components/FlightList/FlightList'
-import DisplayContext from './contexts/DisplayContext'
 
 const theme = createTheme({
     palette: {
@@ -11,40 +11,54 @@ const theme = createTheme({
     },
 })
 
-let currentPlane
-
 function App() {
-    const [displayDetails, setDisplay] = React.useState(false)
-    const changeDisplayEvent = (props, plane) => {
-        switch (props) {
-            case 'YES_FLIGHTDETAILS':
-                currentPlane = plane
-                setDisplay(true)
-                return
-            case 'NO_FLIGHTDETAILS':
-                setDisplay(false)
-                return
-            default:
-                setDisplay(false)
-        }
+    let currentState = {
+        callsign: 'Test123',
+        altitude: 5182,
+        vSpeed: 20,
+        hSpeed: 420,
+        heading: 334.1,
+        distance: 18582.58,
+        squawk: 5565,
+        engines: 'Twin turbo',
     }
 
-    const DisplayProviderValue = React.useMemo(
-        () => ({ displayDetails, changeDisplayEvent, currentPlane }),
-        [displayDetails, changeDisplayEvent]
-    )
+    const [showFlightDetails, setShowFlightDetails] = useState(false)
+
+    const [currentPlane, setCurrentPlane] = useState([])
+
+    if (showFlightDetails) {
+        currentState = {
+            callsign: currentPlane.Call,
+            altitude: Math.round(currentPlane.Alt / 3.2808),
+            vSpeed: 20,
+            hSpeed: Math.round(currentPlane.Spd * 1.60934),
+            heading: currentPlane.Trak,
+            distance: 18582.58,
+            squawk: currentPlane.Sqk,
+            engines: 'Twin turbo',
+        }
+    }
 
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                <div className="mapBackground">
-                    <DisplayContext.Provider value={DisplayProviderValue}>
-                        <Map />
-                    </DisplayContext.Provider>
-                    <DisplayContext.Provider value={DisplayProviderValue}>
-                        <FlightList />
-                    </DisplayContext.Provider>
-                </div>
+                <Map
+                    details={currentPlane}
+                    setDetails={setCurrentPlane}
+                    visible={showFlightDetails}
+                    setVisible={setShowFlightDetails}
+                />
+                <FlightList
+                    setDetails={setCurrentPlane}
+                    setVisible={setShowFlightDetails}
+                />
+                {showFlightDetails ? (
+                    <FlightDetails
+                        details={currentState}
+                        setVisible={setShowFlightDetails}
+                    />
+                ) : null}
             </div>
         </ThemeProvider>
     )

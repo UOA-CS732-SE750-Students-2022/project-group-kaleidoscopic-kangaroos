@@ -2,21 +2,10 @@ import React from 'react'
 import { Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import getAllFlights from '../../services/flightServices'
-import DisplayContext from '../../contexts/DisplayContext'
 
 let allFlights = []
 
-function Planes() {
-    const display = React.useContext(DisplayContext)
-
-    function handleDisplayUpdate(props) {
-        if (display.displayDetails) {
-            display.changeDisplayEvent('NO_FLIGHTDETAILS', props)
-        } else {
-            display.changeDisplayEvent('YES_FLIGHTDETAILS', props)
-        }
-    }
-
+function Planes({ details, setDetails, visible, setVisible }) {
     const [isLoading, setLoading] = React.useState(true)
 
     const getAllNodes = () => {
@@ -39,9 +28,7 @@ function Planes() {
     return (
         <>
             {allFlights.map((item) =>
-                display.currentPlane &&
-                item.Id === display.currentPlane.Id &&
-                display.displayDetails ? (
+                details && item.Id === details.Id && visible ? (
                     <Marker
                         key={item.Id}
                         position={[item.Lat, item.Long]}
@@ -56,14 +43,18 @@ function Planes() {
             src='/newicon2.png'>`,
                         })}
                     >
-                        <Popup onOpen={() => handleDisplayUpdate(item)}>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
+                        <Popup>{item.Call}</Popup>
                     </Marker>
                 ) : (
                     <Marker
                         key={item.Id}
                         position={[item.Lat, item.Long]}
+                        eventHandlers={{
+                            click: () => {
+                                setDetails(item)
+                                setVisible(true)
+                            },
+                        }}
                         icon={L.divIcon({
                             iconSize: [50, 50],
                             iconAnchor: [10, 10],
@@ -75,9 +66,7 @@ function Planes() {
             src='/newicon.png'>`,
                         })}
                     >
-                        <Popup onOpen={() => handleDisplayUpdate(item)}>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
+                        <Popup>{item.Call}</Popup>
                     </Marker>
                 )
             )}
