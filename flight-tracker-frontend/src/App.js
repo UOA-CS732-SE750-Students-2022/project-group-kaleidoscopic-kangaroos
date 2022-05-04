@@ -56,7 +56,15 @@ function App() {
                 />
 
                 {showFlightList ?
-                <FlightList setVisible={setShowFlightList} /> : <FlightListButton setVisible={setShowFlightList} />}
+                    <FlightList 
+                        setVisible={setShowFlightList} 
+                        setDetails={setCurrentPlane}
+                        setDetailsVisible={setShowFlightDetails}
+                    /> : 
+                    <FlightListButton 
+                        setVisible={setShowFlightList} 
+                    />
+                }
 
                 {showFlightDetails ? (
                     <FlightDetails
