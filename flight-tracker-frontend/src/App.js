@@ -2,6 +2,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useState } from 'react'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
+import FlightList from './components/FlightList/FlightList'
 
 
 const theme = createTheme({
@@ -32,6 +33,7 @@ function App() {
                 center={[-41.5000831, 172.8344077]} 
                 zoom={13}
                 />
+                <FlightList />
                 {showFlightDetails ?
                 <FlightDetails details={mockState} setVisible={setShowFlightDetails} /> : null}
             </div>
