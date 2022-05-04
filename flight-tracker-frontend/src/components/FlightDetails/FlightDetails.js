@@ -2,6 +2,7 @@
 import {
     ToggleButtonGroup,
     ToggleButton,
+    Slide,
     Card,
     IconButton,
     Typography,
@@ -48,48 +49,50 @@ const FlightDetails = ({details, setVisible}) => {
     // Render the components.
     return (
         <div>
-            <Card className="flightDetailsDiv" elevation={0}>
-                <div className="flightDetailsRow">
-                    <Typography variant="h4">
-                        Plane {details.callsign}
-                    </Typography>
-                    <IconButton color="primary" onClick={() => setVisible(false)}>
-                        <b>X</b>
-                    </IconButton>
-                </div>
-                {contents}
-                <ToggleButtonGroup
-                    value={selectedPanel}
-                    exclusive
-                    onChange={handleSelectedPanel}
-                >
-                    <ToggleButton 
-                        value="General"
+            <Slide direction="up" in timeout={300}>
+                <Card className="flightDetailsDiv" elevation={0}>
+                    <div className="flightDetailsRow">
+                        <Typography variant="h4">
+                            Plane {details.callsign}
+                        </Typography>
+                        <IconButton color="primary" onClick={() => setVisible(false)}>
+                            <b>X</b>
+                        </IconButton>
+                    </div>
+                    {contents}
+                    <ToggleButtonGroup
+                        value={selectedPanel}
+                        exclusive
+                        onChange={handleSelectedPanel}
                     >
-                        General
-                    </ToggleButton>
-                    <ToggleButton 
-                        value="Spatial"
-                    >
-                        Spatial
-                    </ToggleButton >
-                    <ToggleButton 
-                        value="Speed"
-                    >
-                        Speed
-                    </ToggleButton >
-                    <ToggleButton  
-                        value="Altitude"
-                    >
-                        Altitude
-                    </ToggleButton >
-                    <ToggleButton  
-                        value="ATC"
-                    >
-                        ATC Radio
-                    </ToggleButton>
-                </ToggleButtonGroup>
-            </Card>
+                        <ToggleButton 
+                            value="General"
+                        >
+                            General
+                        </ToggleButton>
+                        <ToggleButton 
+                            value="Spatial"
+                        >
+                            Spatial
+                        </ToggleButton >
+                        <ToggleButton 
+                            value="Speed"
+                        >
+                            Speed
+                        </ToggleButton >
+                        <ToggleButton  
+                            value="Altitude"
+                        >
+                            Altitude
+                        </ToggleButton >
+                        <ToggleButton  
+                            value="ATC"
+                        >
+                            ATC Radio
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </Card>
+            </Slide> 
         </div>
         );
     }

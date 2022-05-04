@@ -9,7 +9,7 @@ import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import { IconButton, ListItemAvatar, Typography } from '@mui/material'
+import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import getAllFlights from '../../services/flightServices'
 import Logo from '../../images/airlineLogo-placeholder.png'
@@ -83,38 +83,40 @@ const FlightList = ({setVisible, setDetailsVisible, setDetails}) => {
     }
 
     return (
-        <Box
-            index="FlightListBox"
-            sx={{
-                width: '100%',
-                height: 800,
-                maxWidth: 400,
-                bgcolor: 'background.paper',
-                position: 'fixed',
-                bottom: '10%',
-                left: '0',
-                zIndex: '999',
-            }}
-        >
-            <div className="flightListTitleRow">
-                <Typography variant="h3" sx={{color:"white"}}>
-                    Flight List
-                </Typography>
-                <IconButton color="primary" onClick={() => setVisible(false)}>
-                    <b>X</b>
-                </IconButton>
-            </div>
-            
-            <FixedSizeList
-                height={800}
-                width={400}
-                itemSize={45}
-                itemCount={tempData.length}
-                overscanCount={5}
+        <Slide direction="right" in timeout={1000}>
+            <Box
+                index="FlightListBox"
+                sx={{
+                    width: '100%',
+                    height: 800,
+                    maxWidth: 400,
+                    bgcolor: 'background.paper',
+                    position: 'fixed',
+                    bottom: '10%',
+                    left: '0',
+                    zIndex: '999',
+                }}
             >
-                {FlightListRows}
-            </FixedSizeList>
-        </Box>
+                <div className="flightListTitleRow">
+                    <Typography variant="h3" sx={{color:"white"}}>
+                        Flight List
+                    </Typography>
+                    <IconButton color="primary" onClick={() => setVisible(false)}>
+                        <b>X</b>
+                    </IconButton>
+                </div>
+                
+                <FixedSizeList
+                    height={800}
+                    width={400}
+                    itemSize={45}
+                    itemCount={tempData.length}
+                    overscanCount={5}
+                >
+                    {FlightListRows}
+                </FixedSizeList>
+            </Box>
+        </Slide>
     )
 }
 
