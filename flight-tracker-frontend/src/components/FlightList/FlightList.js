@@ -12,23 +12,19 @@ import ListItemText from '@mui/material/ListItemText'
 import { ListItemAvatar } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import getAllFlights from '../../services/flightServices'
-import DisplayContext from '../../contexts/DisplayContext'
 import Logo from '../../images/airlineLogo-placeholder.png'
 
 let tempData = []
+let tempSetDetails
+let tempSetVisible
+
+function updateDetails(props) {
+    tempSetDetails(props)
+    tempSetVisible(true)
+}
 
 function FlightListRows(props) {
     const { index, style } = props
-
-    const display = React.useContext(DisplayContext)
-
-    function handleDisplayUpdate(plane) {
-        if (display.displayDetails) {
-            display.changeDisplayEvent('NO_FLIGHTDETAILS', plane)
-        } else {
-            display.changeDisplayEvent('YES_FLIGHTDETAILS', plane)
-        }
-    }
 
     return (
         <ListItem
@@ -37,9 +33,7 @@ function FlightListRows(props) {
             component="div"
             disablePadding
         >
-            <ListItemButton
-                onClick={() => handleDisplayUpdate(tempData[index])}
-            >
+            <ListItemButton onClick={() => updateDetails(tempData[index])}>
                 <ListItemAvatar>
                     <Box
                         component="img"
@@ -59,7 +53,10 @@ function FlightListRows(props) {
     )
 }
 
-function FlightList() {
+function FlightList({ setDetails, setVisible }) {
+    tempSetDetails = setDetails
+    tempSetVisible = setVisible
+
     const [isLoading, setLoading] = React.useState(true)
 
     const getAllNodes = () => {
