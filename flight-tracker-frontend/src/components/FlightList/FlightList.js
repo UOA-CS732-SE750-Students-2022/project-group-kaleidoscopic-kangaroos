@@ -1,11 +1,19 @@
+// TODO
+// - Dynamically update airline logos
+// - Fix Up Styling of List
+// - Header
+// - Dynamic Positioning
+
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
+import { ListItemAvatar } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import getAllFlights from '../../services/flightServices'
 import DisplayContext from '../../contexts/DisplayContext'
+import Logo from '../../images/airline-logos/AAA.png'
 
 let tempData = []
 
@@ -32,9 +40,19 @@ function renderRow(props) {
             <ListItemButton
                 onClick={() => handleDisplayUpdate(tempData[index])}
             >
+                <ListItemAvatar>
+                    <Box
+                        component="img"
+                        sx={{
+                            height: 32,
+                        }}
+                        alt="Your logo."
+                        src={Logo}
+                    />
+                </ListItemAvatar>
                 <ListItemText
                     style={{ color: 'white' }}
-                    primary={`${tempData[index].Reg} - ${tempData[index].Op}`}
+                    primary={`${tempData[index].Call} - ${tempData[index].Op}`}
                 />
             </ListItemButton>
         </ListItem>
@@ -49,7 +67,7 @@ function FlightList() {
             tempData = result
             if (tempData === undefined) {
                 // Do Nothing!
-            } else if (tempData != null) {
+            } else if (tempData !== undefined) {
                 tempData.pop()
             }
             setLoading(false)
@@ -72,7 +90,7 @@ function FlightList() {
             sx={{
                 width: '100%',
                 height: 800,
-                maxWidth: 360,
+                maxWidth: 400,
                 bgcolor: 'background.paper',
                 position: 'fixed',
                 bottom: '10%',
@@ -82,8 +100,8 @@ function FlightList() {
         >
             <FixedSizeList
                 height={800}
-                width={360}
-                itemSize={46}
+                width={400}
+                itemSize={45}
                 itemCount={tempData.length}
                 overscanCount={5}
             >

@@ -23,7 +23,7 @@ function Planes() {
         getAllFlights().then((result) => {
             allFlights = result
             allFlights.pop()
-            console.log(allFlights)
+            // console.log(allFlights)
             setLoading(false)
         })
     }
