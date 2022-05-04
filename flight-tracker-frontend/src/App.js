@@ -1,7 +1,8 @@
+import React from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Map from './components/Map/Map'
-import FlightDetails from './components/FlightDetails/FlightDetails'
 import FlightList from './components/FlightList/FlightList'
+import DisplayContext from './contexts/DisplayContext'
 
 const theme = createTheme({
     palette: {
@@ -10,24 +11,40 @@ const theme = createTheme({
     },
 })
 
+let currentPlane
+
 function App() {
-    const mockState = {
-        callsign: 'Test123',
-        altitude: 5182,
-        vSpeed: 20,
-        hSpeed: 420,
-        heading: 334.1,
-        distance: 18582.58,
-        squawk: 5565,
-        engines: 'Twin turbo',
+    const [displayDetails, setDisplay] = React.useState(false)
+    const changeDisplayEvent = (props, plane) => {
+        switch (props) {
+            case 'YES_FLIGHTDETAILS':
+                currentPlane = plane
+                setDisplay(true)
+                return
+            case 'NO_FLIGHTDETAILS':
+                setDisplay(false)
+                return
+            default:
+                setDisplay(false)
+        }
     }
+
+    const DisplayProviderValue = React.useMemo(
+        () => ({ displayDetails, changeDisplayEvent, currentPlane }),
+        [displayDetails, changeDisplayEvent]
+    )
 
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                <Map center={[-41.5000831, 172.8344077]} zoom={13} />
-                <FlightList />
-                <FlightDetails details={mockState} />
+                <div className="mapBackground">
+                    <DisplayContext.Provider value={DisplayProviderValue}>
+                        <Map />
+                    </DisplayContext.Provider>
+                    <DisplayContext.Provider value={DisplayProviderValue}>
+                        <FlightList />
+                    </DisplayContext.Provider>
+                </div>
             </div>
         </ThemeProvider>
     )
