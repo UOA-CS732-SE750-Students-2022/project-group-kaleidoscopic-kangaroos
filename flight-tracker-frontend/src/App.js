@@ -15,7 +15,7 @@ const theme = createTheme({
 })
 
 function App() {
-    const mockState = {
+    let currentState = {
         callsign: 'Test123',
         altitude: 5182,
         vSpeed: 20,
@@ -27,19 +27,43 @@ function App() {
     }
 
     const [showFlightList, setShowFlightList] = useState(false);
-    const [showFlightDetails, setShowFlightDetails] = useState(false);
+    const [showFlightDetails, setShowFlightDetails] = useState(false)
+
+    const [currentPlane, setCurrentPlane] = useState([])
+
+    if (showFlightDetails) {
+        currentState = {
+            callsign: currentPlane.Call,
+            altitude: Math.round(currentPlane.Alt / 3.2808),
+            vSpeed: 20,
+            hSpeed: Math.round(currentPlane.Spd * 1.60934),
+            heading: currentPlane.Trak,
+            distance: 18582.58,
+            squawk: currentPlane.Sqk,
+            engines: 'Twin turbo',
+        }
+    }
+
 
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                <Map 
-                center={[-41.5000831, 172.8344077]} 
-                zoom={13}
+                <Map
+                    details={currentPlane}
+                    setDetails={setCurrentPlane}
+                    visible={showFlightDetails}
+                    setVisible={setShowFlightDetails}
                 />
+
                 {showFlightList ?
                 <FlightList setVisible={setShowFlightList} /> : <FlightListButton setVisible={setShowFlightList} />}
-                {showFlightDetails ?
-                <FlightDetails details={mockState} setVisible={setShowFlightDetails} /> : null}
+
+                {showFlightDetails ? (
+                    <FlightDetails
+                        details={currentState}
+                        setVisible={setShowFlightDetails}
+                    />
+                ) : null}
             </div>
         </ThemeProvider>
     )
