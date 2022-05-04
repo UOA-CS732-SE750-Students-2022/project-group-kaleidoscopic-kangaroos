@@ -13,7 +13,7 @@ import { ListItemAvatar } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import getAllFlights from '../../services/flightServices'
 import DisplayContext from '../../contexts/DisplayContext'
-import Logo from '../../images/airline-logos/AAA.png'
+import Logo from '../../images/airlineLogo-placeholder.png'
 
 let tempData = []
 
