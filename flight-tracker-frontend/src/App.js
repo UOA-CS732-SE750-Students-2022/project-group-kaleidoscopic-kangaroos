@@ -5,8 +5,6 @@ import FlightDetails from './components/FlightDetails/FlightDetails'
 import FlightList from './components/FlightList/FlightList'
 import FlightListButton from './components/FlightListButton/FlightListButton'
 
-
-
 const theme = createTheme({
     palette: {
         mode: 'dark',

@@ -11,9 +11,11 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
 import { FixedSizeList } from 'react-window'
+import { VscChromeClose } from 'react-icons/vsc';
 import getAllFlights from '../../services/flightServices'
 import Logo from '../../images/airlineLogo-placeholder.png'
 import './FlightList.css'
+
 
 let tempData = []
 let tempSetDetails
@@ -101,8 +103,8 @@ const FlightList = ({setVisible, setDetailsVisible, setDetails}) => {
                     <Typography variant="h3" sx={{color:"white"}}>
                         Flight List
                     </Typography>
-                    <IconButton color="primary" onClick={() => setVisible(false)}>
-                        <b>X</b>
+                    <IconButton color="primary" size='large' onClick={() => setVisible(false)}>
+                        <VscChromeClose />
                     </IconButton>
                 </div>
                 

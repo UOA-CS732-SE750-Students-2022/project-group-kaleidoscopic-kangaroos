@@ -7,6 +7,7 @@ import {
     IconButton,
     Typography,
 } from '@mui/material'
+import { VscChromeClose } from 'react-icons/vsc';
 import React, {useState} from 'react'
 import GeneralPanel from './GeneralPanel'
 import SpatialPanel from './SpatialPanel'
@@ -55,8 +56,8 @@ const FlightDetails = ({details, setVisible}) => {
                         <Typography variant="h4">
                             Plane {details.callsign}
                         </Typography>
-                        <IconButton color="primary" onClick={() => setVisible(false)}>
-                            <b>X</b>
+                        <IconButton color="primary" size='large' onClick={() => setVisible(false)}>
+                            <VscChromeClose />
                         </IconButton>
                     </div>
                     {contents}
