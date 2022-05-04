@@ -1,10 +1,9 @@
 /* eslint-disable arrow-body-style */
 import { Button, Typography } from "@mui/material";
 import { ImAirplane } from 'react-icons/im';
-import './FlightListButton.css'
 
 const FlightListButton = ({setVisible}) => {
-    return <Button variant="contained" color="primary" className="flightListButton"
+    return <Button variant="contained" color="primary"
         onClick={() => setVisible(true)}
         sx={{
         position: "fixed", left: 0, top: 100, zIndex:999, padding: 2}}>
