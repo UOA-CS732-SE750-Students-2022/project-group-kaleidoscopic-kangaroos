@@ -3,6 +3,8 @@ import { useState } from 'react'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import FlightList from './components/FlightList/FlightList'
+import FlightListButton from './components/FlightListButton/FlightListButton'
+
 
 
 const theme = createTheme({
@@ -24,7 +26,8 @@ function App() {
         engines: 'Twin turbo',
     }
 
-    const [showFlightDetails, setShowFlightDetails] = useState(true);
+    const [showFlightList, setShowFlightList] = useState(false);
+    const [showFlightDetails, setShowFlightDetails] = useState(false);
 
     return (
         <ThemeProvider theme={theme}>
@@ -33,7 +36,8 @@ function App() {
                 center={[-41.5000831, 172.8344077]} 
                 zoom={13}
                 />
-                <FlightList />
+                {showFlightList ?
+                <FlightList setVisible={setShowFlightList} /> : <FlightListButton setVisible={setShowFlightList} />}
                 {showFlightDetails ?
                 <FlightDetails details={mockState} setVisible={setShowFlightDetails} /> : null}
             </div>

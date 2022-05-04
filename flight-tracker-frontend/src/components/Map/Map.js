@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable arrow-body-style */
 import React from 'react'
 import './Map.css'
@@ -13,8 +14,8 @@ const Map = ({center, zoom}) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
       {
+        /*
         hotSpotData.map(hotspot => (
           <Marker 
             key={hotspot.name}
@@ -23,6 +24,7 @@ const Map = ({center, zoom}) => {
             <Popup><h4>{hotspot.name}</h4></Popup>
           </Marker>
         ))
+        */
       }
     </MapContainer>
   </div>

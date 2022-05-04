@@ -4,20 +4,21 @@
 // - Fix Up Styling of List -- Include more INFO like, LogLang or Speed?
 // - Header and Footer of List showing update time
 
-import * as React from 'react'
+import React, {useState, useEffect} from 'react'
 import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import { ListItemAvatar } from '@mui/material'
+import { IconButton, ListItemAvatar, Typography } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import getAllFlights from '../../services/flightServices'
 import DisplayContext from '../../contexts/DisplayContext'
 import Logo from '../../images/airlineLogo-placeholder.png'
+import './FlightList.css'
 
 let tempData = []
 
-function FlightListRows(props) {
+const FlightListRows = (props) => {
     const { index, style } = props
 
     const display = React.useContext(DisplayContext)
@@ -25,6 +26,7 @@ function FlightListRows(props) {
     function handleDisplayUpdate(plane) {
         if (display.displayDetails) {
             display.changeDisplayEvent('NO_FLIGHTDETAILS', plane)
+            console.log("test");
         } else {
             display.changeDisplayEvent('YES_FLIGHTDETAILS', plane)
         }
@@ -59,8 +61,8 @@ function FlightListRows(props) {
     )
 }
 
-function FlightList() {
-    const [isLoading, setLoading] = React.useState(true)
+const FlightList = ({setVisible}) => {
+    const [isLoading, setLoading] = useState(true)
 
     const getAllNodes = () => {
         getAllFlights().then((result) => {
@@ -74,7 +76,7 @@ function FlightList() {
         })
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         setInterval(() => {
             setLoading(true)
         }, 1000)
@@ -98,6 +100,15 @@ function FlightList() {
                 zIndex: '999',
             }}
         >
+            <div className="flightListTitleRow">
+                <Typography variant="h3" sx={{color:"white"}}>
+                    Flight List
+                </Typography>
+                <IconButton color="primary" onClick={() => setVisible(false)}>
+                    <b>X</b>
+                </IconButton>
+            </div>
+            
             <FixedSizeList
                 height={800}
                 width={400}
