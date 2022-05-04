@@ -3,109 +3,16 @@ import {
     ToggleButtonGroup,
     ToggleButton,
     Card,
-    Container,
     IconButton,
-    Paper,
     Typography,
 } from '@mui/material'
 import React, {useState} from 'react'
-import plane from '../../images/plane-placeholder.jpg'
+import GeneralPanel from './GeneralPanel'
+import SpatialPanel from './SpatialPanel'
+import SpeedPanel from './SpeedPanel'
+import AltitudePanel from './AltitudePanel'
+import AtcRadioPanel from './AtcRadioPanel'
 import './FlightDetails.css'
-
-// Shows General information about the plane.
-const GeneralPanel = ({details}) => {
-    return (
-        <div className="flightDetailsRow">
-            <Paper variant="outlined" className="planeImageContainer">
-                <img src={plane} alt="a plane" className="planeImage" />
-            </Paper>
-            <Container>
-                <Typography>
-                    <b>Altitude:</b> {details.altitude}m
-                </Typography>
-                <Typography>
-                    <b>Vertical Speed:</b> {details.vSpeed}m/min
-                </Typography>
-                <Typography>
-                    <b>Speed:</b> {details.hSpeed}km/hr
-                </Typography>
-                <Typography>
-                    <b>Heading:</b> {details.heading}&deg;
-                </Typography>
-                <Typography>
-                    <b>Distance:</b> {details.distance}km
-                </Typography>
-                <Typography>
-                    <b>Squawk:</b> {details.squawk}
-                </Typography>
-                <Typography>
-                    <b>Engines:</b> {details.engines}
-                </Typography>
-            </Container>
-        </div>
-    );
-}
-
-// Shows Spatial information about the plane.
-const SpatialPanel = ({details}) => {
-    return (
-        <div className="flightDetailsRow">
-            <Container>
-                <Typography>
-                    <b>Distance:</b> {details.distance}km
-                </Typography>
-                <Typography>
-                    <b>Heading:</b> {details.heading}&deg;
-                </Typography>
-                <Typography>
-                    <b>Squawk:</b> {details.squawk}
-                </Typography>
-            </Container>
-        </div>
-    );
-}
-
-// Shows the speed of the plane.
-const SpeedPanel = ({details}) => {
-    return (
-        <div className="flightDetailsRow">
-            <Container>
-                <Typography>
-                    <b>Horizontal Speed:</b> {details.hSpeed}km/hr
-                </Typography>
-                <Typography>
-                    <b>Vertical Speed:</b> {details.vSpeed}m/min
-                </Typography>
-            </Container>
-        </div>
-    );
-}
-
-// Shows Altitude information about the plane.
-const AltitudePanel = ({details}) => {
-    return (
-        <div className="flightDetailsRow">
-            <Container>
-                <Typography>
-                    <b>Altitude:</b> {details.altitude}m
-                </Typography>
-            </Container>
-        </div>
-    );
-}
-
-// Shows radio information about the plane.
-const AtcRadioPanel = () => {
-    return (
-        <div className="flightDetailsRow">
-            <Container>
-                <Typography>
-                    <b>Radio:</b> Test
-                </Typography>
-            </Container>
-        </div>
-    );
-}
 
 const FlightDetails = ({details, setVisible}) => {
     const [selectedPanel, setSelectedPanel] = useState("General");
