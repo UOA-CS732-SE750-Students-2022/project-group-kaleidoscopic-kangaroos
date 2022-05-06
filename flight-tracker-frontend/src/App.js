@@ -2,7 +2,7 @@ import React from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
-import MenuAndSettings from './components/MenuAndSettings/MenuAndSettings'
+import Settings from './components/Settings/Settings'
 
 const theme = createTheme({
     palette: {
@@ -42,7 +42,7 @@ function App() {
                 <FlightDetails 
                 details={mockState}
                 />
-                < MenuAndSettings
+                < Settings
                 details1={handleClose}
                 details2={handleClick}
                 details3={anchorEl}
