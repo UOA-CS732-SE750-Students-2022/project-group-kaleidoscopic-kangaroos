@@ -8,7 +8,7 @@ import {
     Popup,
 } from 'react-leaflet'
 import Planes from '../Planes/Planes'
-import hotSpotData from '../../data/airports.json'
+import hotSpotData from '../../Data/newSpots.json'
 
 function Map({ details, setDetails, visible, setVisible }) {
     if (visible) {

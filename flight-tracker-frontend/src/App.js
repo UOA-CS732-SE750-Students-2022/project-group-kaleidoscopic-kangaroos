@@ -1,7 +1,10 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 import { useState } from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
+import Settings from './components/Settings/Settings'
 import FlightList from './components/FlightList/FlightList'
 import FlightListButton from './components/FlightListButton/FlightListButton'
 
@@ -23,6 +26,7 @@ function App() {
         squawk: 5565,
         engines: 'Twin turbo',
     }
+    
 
     const [showFlightList, setShowFlightList] = useState(false);
     const [showFlightDetails, setShowFlightDetails] = useState(false)
@@ -51,6 +55,10 @@ function App() {
                     setDetails={setCurrentPlane}
                     visible={showFlightDetails}
                     setVisible={setShowFlightDetails}
+                />
+                < Settings
+               
+                
                 />
 
                 {showFlightList ?
