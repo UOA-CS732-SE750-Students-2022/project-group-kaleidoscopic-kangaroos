@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import FlightList from './components/FlightList/FlightList'
-
+import FlightListButton from './components/FlightListButton/FlightListButton'
 
 const theme = createTheme({
     palette: {
@@ -24,6 +24,7 @@ function App() {
         engines: 'Twin turbo',
     }
 
+    const [showFlightList, setShowFlightList] = useState(false);
     const [showFlightDetails, setShowFlightDetails] = useState(false)
 
     const [currentPlane, setCurrentPlane] = useState([])
@@ -51,10 +52,18 @@ function App() {
                     visible={showFlightDetails}
                     setVisible={setShowFlightDetails}
                 />
-                <FlightList
-                    setDetails={setCurrentPlane}
-                    setVisible={setShowFlightDetails}
-                />
+
+                {showFlightList ?
+                    <FlightList 
+                        setVisible={setShowFlightList} 
+                        setDetails={setCurrentPlane}
+                        setDetailsVisible={setShowFlightDetails}
+                    /> : 
+                    <FlightListButton 
+                        setVisible={setShowFlightList} 
+                    />
+                }
+
                 {showFlightDetails ? (
                     <FlightDetails
                         details={currentState}

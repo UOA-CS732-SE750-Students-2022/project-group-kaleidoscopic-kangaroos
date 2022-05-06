@@ -4,26 +4,29 @@
 // - Fix Up Styling of List -- Include more INFO like, LogLang or Speed?
 // - Header and Footer of List showing update time
 
-import * as React from 'react'
+import React, {useState, useEffect} from 'react'
 import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import { ListItemAvatar } from '@mui/material'
+import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
 import { FixedSizeList } from 'react-window'
+import { VscChromeClose } from 'react-icons/vsc';
 import getAllFlights from '../../services/flightServices'
 import Logo from '../../images/airlineLogo-placeholder.png'
+import './FlightList.css'
+
 
 let tempData = []
 let tempSetDetails
-let tempSetVisible
+let tempSetDetailsVisible
 
 function updateDetails(props) {
     tempSetDetails(props)
-    tempSetVisible(true)
+    tempSetDetailsVisible(true)
 }
 
-function FlightListRows(props) {
+const FlightListRows = (props) => {
     const { index, style } = props
 
     return (
@@ -53,11 +56,11 @@ function FlightListRows(props) {
     )
 }
 
-function FlightList({ setDetails, setVisible }) {
+const FlightList = ({setVisible, setDetailsVisible, setDetails}) => {
     tempSetDetails = setDetails
-    tempSetVisible = setVisible
+    tempSetDetailsVisible = setDetailsVisible
 
-    const [isLoading, setLoading] = React.useState(true)
+    const [isLoading, setLoading] = useState(true)
 
     const getAllNodes = () => {
         getAllFlights().then((result) => {
@@ -71,7 +74,7 @@ function FlightList({ setDetails, setVisible }) {
         })
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         setInterval(() => {
             setLoading(true)
         }, 1000)
@@ -82,29 +85,42 @@ function FlightList({ setDetails, setVisible }) {
     }
 
     return (
-        <Box
-            index="FlightListBox"
-            sx={{
-                width: '100%',
-                height: 800,
-                maxWidth: 400,
-                bgcolor: 'background.paper',
-                position: 'fixed',
-                bottom: '10%',
-                left: '0',
-                zIndex: '999',
-            }}
-        >
-            <FixedSizeList
-                height={800}
-                width={400}
-                itemSize={45}
-                itemCount={tempData.length}
-                overscanCount={5}
+        <Slide direction="right" in timeout={1000}>
+            <Box
+                index="FlightListBox"
+                sx={{
+                    width: '100%',
+                    height: 800,
+                    maxWidth: 400,
+                    bgcolor: 'background.paper',
+                    position: 'fixed',
+                    bottom: '10%',
+                    left: '0',
+                    zIndex: '999',
+                    borderTopRightRadius: 8,
+                    borderBottomRightRadius: 8,
+                }}
             >
-                {FlightListRows}
-            </FixedSizeList>
-        </Box>
+                <div className="flightListTitleRow">
+                    <Typography variant="h3" sx={{color:"white"}}>
+                        Flight List
+                    </Typography>
+                    <IconButton color="primary" size='large' onClick={() => setVisible(false)}>
+                        <VscChromeClose />
+                    </IconButton>
+                </div>
+                
+                <FixedSizeList
+                    height={800}
+                    width={400}
+                    itemSize={45}
+                    itemCount={tempData.length}
+                    overscanCount={5}
+                >
+                    {FlightListRows}
+                </FixedSizeList>
+            </Box>
+        </Slide>
     )
 }
 
