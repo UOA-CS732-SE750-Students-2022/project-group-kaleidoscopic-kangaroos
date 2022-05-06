@@ -1,6 +1,7 @@
-import React from "react";
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 import { useState } from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import Settings from './components/Settings/Settings'
@@ -25,15 +26,7 @@ function App() {
         squawk: 5565,
         engines: 'Twin turbo',
     }
-    const [anchorEl, setAnchorEl] = React.useState(null);
-  
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
     
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
 
     const [showFlightList, setShowFlightList] = useState(false);
     const [showFlightDetails, setShowFlightDetails] = useState(false)
@@ -64,10 +57,7 @@ function App() {
                     setVisible={setShowFlightDetails}
                 />
                 < Settings
-                details1={handleClose}
-                details2={handleClick}
-                details3={anchorEl}
-                details4={setAnchorEl}
+               
                 
                 />
 
