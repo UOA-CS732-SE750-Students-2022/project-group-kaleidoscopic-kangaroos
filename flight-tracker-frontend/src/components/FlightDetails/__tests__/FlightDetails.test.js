@@ -1,26 +1,137 @@
-import {render} from '@testing-library/react'
+/* eslint-disable no-unused-vars */
+import {render, fireEvent} from '@testing-library/react'
 import FlightDetails from "../FlightDetails"
 
-it('renders flight details panel correctly', () => {
-    const mockState = {
-        callsign: 'Test123',
-        altitude: 5182,
-        vSpeed: 20,
-        hspeed: 420,
-        heading: 334.1,
-        distance: 18582.58,
-        squawk: 5565,
-        engines: 'Twin turbo',
-    }
+const mockState = {
+    callsign: 'Test123',
+    altitude: 5182,
+    vSpeed: 20,
+    hSpeed: 420,
+    heading: 334.1,
+    distance: 18582.58,
+    squawk: 5565,
+    engines: 'Twin turbo',
+}
 
+it('renders flight details panel correctly', () => {
     const {queryByText} = render(<FlightDetails details={mockState} />);
 
-    expect(queryByText("Altitude: 5182m")).toBeDefined();
-    expect(queryByText("Vertical Speed: 20m/min")).toBeDefined();
-    expect(queryByText("Speed: 420km/hr")).toBeDefined();
-    expect(queryByText("Heading: 334.1°")).toBeDefined();
-    expect(queryByText("Distance: 18582.58km")).toBeDefined();
-    expect(queryByText("Squawk: 5565")).toBeDefined();
-    expect(queryByText("Engines: Twin turbo")).toBeDefined();
+    expect(queryByText("Plane Test123")).toBeTruthy();
+    expect(queryByText("General")).toBeTruthy();
+    expect(queryByText("Altitude")).toBeTruthy();
+    expect(queryByText("Spatial")).toBeTruthy();
+    expect(queryByText("Speed")).toBeTruthy();
+    expect(queryByText("ATC Radio")).toBeTruthy();
+});
 
+it('renders general pane correctly', () => {
+    const {queryByText} = render(<FlightDetails details={mockState} />);
+
+    expect(queryByText("Altitude:")).toBeTruthy();
+    expect(queryByText("Vertical Speed:")).toBeTruthy();
+    expect(queryByText("Speed:")).toBeTruthy();
+    expect(queryByText("Heading:")).toBeTruthy();
+    expect(queryByText("Distance:")).toBeTruthy();
+    expect(queryByText("Squawk:")).toBeTruthy();
+    expect(queryByText("Engines:")).toBeTruthy();
+
+    expect(queryByText("5182m")).toBeTruthy();
+    expect(queryByText("20m/min")).toBeTruthy();
+    expect(queryByText("420km/hr")).toBeTruthy();
+    expect(queryByText("334.1°")).toBeTruthy();
+    expect(queryByText("18582.58km")).toBeTruthy();
+    expect(queryByText("5565")).toBeTruthy();
+    expect(queryByText("Twin turbo")).toBeTruthy();
+})
+
+it('switches to spatial panel correctly', () => {
+    const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
+
+    const spatialButton = queryByRole("button", {
+        name: "Spatial"
+    });
+    expect(spatialButton).toBeDefined();
+
+    fireEvent.click(spatialButton);
+    
+
+    expect(queryByText("Heading:")).toBeTruthy();
+    expect(queryByText("Distance:")).toBeTruthy();
+    expect(queryByText("Squawk:")).toBeTruthy();
+    expect(queryByText("334.1°")).toBeTruthy();
+    expect(queryByText("18582.58km")).toBeTruthy();
+    expect(queryByText("5565")).toBeTruthy();
+
+    expect(queryByText("Altitude:")).toBeFalsy();
+    expect(queryByText("Vertical Speed:")).toBeFalsy();
+    expect(queryByText("Speed:")).toBeFalsy();
+    expect(queryByText("Engines:")).toBeFalsy();
+    expect(queryByText("5182m")).toBeFalsy();
+    expect(queryByText("20m/min")).toBeFalsy();
+    expect(queryByText("420km/hr")).toBeFalsy();
+    expect(queryByText("Twin turbo")).toBeFalsy();
+});
+
+it('switches to speed panel correctly', () => {
+    const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
+
+    const speedButton = queryByRole("button", {
+        name: "Speed"
+    });
+    expect(speedButton).toBeDefined();
+
+    fireEvent.click(speedButton);
+
+    expect(queryByText("Vertical Speed:")).toBeTruthy();
+    expect(queryByText("Horizontal Speed:")).toBeTruthy();
+    expect(queryByText("20m/min")).toBeTruthy();
+    expect(queryByText("420km/hr")).toBeTruthy();
+
+    expect(queryByText("Altitude:")).toBeFalsy();
+    expect(queryByText("Heading:")).toBeFalsy();
+    expect(queryByText("Distance:")).toBeFalsy();
+    expect(queryByText("Squawk:")).toBeFalsy();
+    expect(queryByText("Engines:")).toBeFalsy();
+    expect(queryByText("5182m")).toBeFalsy();
+    expect(queryByText("334.1°")).toBeFalsy();
+    expect(queryByText("18582.58km")).toBeFalsy();
+    expect(queryByText("5565")).toBeFalsy();
+    expect(queryByText("Twin turbo")).toBeFalsy();
+});
+
+it('switches to altitude panel correctly', () => {
+    const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
+
+    const altitudeButton = queryByRole("button", {
+        name: "Altitude"
+    });
+    expect(altitudeButton).toBeDefined();
+
+    fireEvent.click(altitudeButton);
+    expect(queryByText("Altitude:")).toBeTruthy();
+    expect(queryByText("5182m")).toBeTruthy();
+
+    expect(queryByText("Vertical Speed:")).toBeFalsy();
+    expect(queryByText("Speed:")).toBeFalsy();
+    expect(queryByText("Heading:")).toBeFalsy();
+    expect(queryByText("Distance:")).toBeFalsy();
+    expect(queryByText("Squawk:")).toBeFalsy();
+    expect(queryByText("Engines:")).toBeFalsy();
+    expect(queryByText("20m/min")).toBeFalsy();
+    expect(queryByText("420km/hr")).toBeFalsy();
+    expect(queryByText("334.1°")).toBeFalsy();
+    expect(queryByText("18582.58km")).toBeFalsy();
+    expect(queryByText("5565")).toBeFalsy();
+    expect(queryByText("Twin turbo")).toBeFalsy();
+});
+
+it('switches to ATC radio panel correctly', () => {
+    const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
+
+    const atcRadioButton = queryByRole("button", {
+        name: "ATC Radio"
+    });
+    expect(atcRadioButton).toBeDefined();
+
+    fireEvent.click(atcRadioButton);
 });

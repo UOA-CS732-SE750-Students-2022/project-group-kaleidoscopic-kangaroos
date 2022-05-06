@@ -1,8 +1,11 @@
 import React from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useState } from 'react'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import Settings from './components/Settings/Settings'
+import FlightList from './components/FlightList/FlightList'
+import FlightListButton from './components/FlightListButton/FlightListButton'
 
 const theme = createTheme({
     palette: {
@@ -12,7 +15,7 @@ const theme = createTheme({
 })
 
 function App() {
-    const mockState = {
+    let currentState = {
         callsign: 'Test123',
         altitude: 5182,
         vSpeed: 20,
@@ -32,15 +35,33 @@ function App() {
       setAnchorEl(event.currentTarget);
     };
 
+    const [showFlightList, setShowFlightList] = useState(false);
+    const [showFlightDetails, setShowFlightDetails] = useState(false)
+
+    const [currentPlane, setCurrentPlane] = useState([])
+
+    if (showFlightDetails) {
+        currentState = {
+            callsign: currentPlane.Call,
+            altitude: Math.round(currentPlane.Alt / 3.2808),
+            vSpeed: 20,
+            hSpeed: Math.round(currentPlane.Spd * 1.60934),
+            heading: currentPlane.Trak,
+            distance: 18582.58,
+            squawk: currentPlane.Sqk,
+            engines: 'Twin turbo',
+        }
+    }
+
+
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                <Map 
-                center={[-41.5000831, 172.8344077]} 
-                zoom={13}
-                />
-                <FlightDetails 
-                details={mockState}
+                <Map
+                    details={currentPlane}
+                    setDetails={setCurrentPlane}
+                    visible={showFlightDetails}
+                    setVisible={setShowFlightDetails}
                 />
                 < Settings
                 details1={handleClose}
@@ -49,6 +70,24 @@ function App() {
                 details4={setAnchorEl}
                 
                 />
+
+                {showFlightList ?
+                    <FlightList 
+                        setVisible={setShowFlightList} 
+                        setDetails={setCurrentPlane}
+                        setDetailsVisible={setShowFlightDetails}
+                    /> : 
+                    <FlightListButton 
+                        setVisible={setShowFlightList} 
+                    />
+                }
+
+                {showFlightDetails ? (
+                    <FlightDetails
+                        details={currentState}
+                        setVisible={setShowFlightDetails}
+                    />
+                ) : null}
             </div>
         </ThemeProvider>
     )
