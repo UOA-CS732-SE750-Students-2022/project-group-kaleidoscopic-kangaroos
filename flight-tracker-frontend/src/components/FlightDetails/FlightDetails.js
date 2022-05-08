@@ -16,6 +16,12 @@ import AltitudePanel from './AltitudePanel'
 import AtcRadioPanel from './AtcRadioPanel'
 import './FlightDetails.css'
 
+/**
+ * 
+ * @param {object} details provides the details for the selected plane.
+ * @param {boolean} setVisible used to set the FlightDetails component invisible.
+ * @returns the jsx for the component that will be rendered.
+ */
 const FlightDetails = ({details, setVisible}) => {
     const [selectedPanel, setSelectedPanel] = useState("General");
 
