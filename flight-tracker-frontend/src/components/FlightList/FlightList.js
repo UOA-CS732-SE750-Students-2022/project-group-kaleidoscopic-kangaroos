@@ -85,8 +85,9 @@ const FlightList = ({setVisible, setDetailsVisible, setDetails}) => {
     }
 
     return (
-        <Slide direction="right" in timeout={1000}>
+        <Slide data-testid='slide-component' direction="right" in timeout={1000}>
             <Box
+                data-testid='box-component'
                 index="FlightListBox"
                 sx={{
                     width: '100%',
@@ -111,6 +112,7 @@ const FlightList = ({setVisible, setDetailsVisible, setDetails}) => {
                 </div>
                 
                 <FixedSizeList
+                data-testid='fixedsizelist-component'
                     height={800}
                     width={400}
                     itemSize={45}
