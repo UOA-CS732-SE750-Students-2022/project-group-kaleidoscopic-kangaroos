@@ -69,8 +69,8 @@ function App() {
                 <Map
                     details={currentPlane}
                     setDetails={setCurrentPlane}
-                    visible={showFlightDetails}
-                    setVisible={setShowFlightDetails}
+                    flightDetailsVisible={showFlightDetails}
+                    setFlightDetailsVisible={setShowFlightDetails}
                 />
                 < Settings />
 
