@@ -34,7 +34,7 @@ function Planes({ details, setDetails, visible, setVisible }) {
                         position={[item.Lat, item.Long]}
                         icon={L.divIcon({
                             iconSize: [50, 50],
-                            iconAnchor: [10, 10],
+                            iconAnchor: [25, 25],
                             className: 'yourClassName',
                             html: `<img 
             style="transform: rotate(${item.Trak}deg);"
@@ -57,7 +57,7 @@ function Planes({ details, setDetails, visible, setVisible }) {
                         }}
                         icon={L.divIcon({
                             iconSize: [50, 50],
-                            iconAnchor: [10, 10],
+                            iconAnchor: [25, 25],
                             className: 'yourClassName',
                             html: `<img 
             style="transform: rotate(${item.Trak}deg);"

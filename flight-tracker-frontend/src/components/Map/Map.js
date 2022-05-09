@@ -7,6 +7,7 @@ import {
     Marker,
     Popup,
 } from 'react-leaflet'
+import L from 'leaflet'
 import Planes from '../Planes/Planes'
 import airports from '../../data/newSpots.json'
 
@@ -38,8 +39,17 @@ function Map({ details, setDetails, flightDetailsVisible, setFlightDetailsVisibl
                 <Marker
                     key={airport.name}
                     position={[airport.lat, airport.lon]}
+                    icon={L.divIcon({
+                        iconSize: [64, 79],
+                        iconAnchor: [32, 79],
+                        className: 'yourClassName',
+                        html: `<img 
+        height="79" 
+        width="64"
+        src='/airporticon.png'>`,
+                    })}
                 >
-                    <Popup>
+                    <Popup offset={new L.Point(0, -50)}>
                         <h4>{airport.name}</h4>
                     </Popup>
                 </Marker>
