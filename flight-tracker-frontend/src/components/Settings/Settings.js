@@ -16,12 +16,7 @@ const Settings = () => {
   };
   
   return (
-    <div
-    
-    className="menuBackground"
-  
-    >
-      
+    <div className="menuBackground">
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
