@@ -87,7 +87,7 @@ function App() {
                     /> : 
                     <FlightListButton 
                         setVisible={setShowFlightList}
-                        text={isTabletOrMobile ? null : "Flight List"}
+                        text={isTabletOrMobile ? "" : "Flight List"}
                     />
                 }
 
