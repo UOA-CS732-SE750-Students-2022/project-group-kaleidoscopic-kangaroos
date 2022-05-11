@@ -63,7 +63,7 @@ const FlightListRows = (props) => {
                 </ListItemAvatar>
                 <ListItemText
                     style={{ color: 'white' }}
-                    primary={`${callsign} - ${opicao} - ${op}`}
+                    primary={`${callsign} - ${op}`}
                 />
             </ListItemButton>
         </ListItem>
@@ -105,7 +105,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
                 sx={{
                     width: '100%',
                     height: '100%',
-                    maxWidth: 400,
+                    maxWidth: 450,
                     bgcolor: 'background.paper',
                     position: 'fixed',
                     top: '10%',
@@ -130,7 +130,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
 
                 <FixedSizeList
                     height={windowHeight}
-                    width={400}
+                    width={450}
                     itemSize={50}
                     itemCount={tempData.length}
                     overscanCount={5}
