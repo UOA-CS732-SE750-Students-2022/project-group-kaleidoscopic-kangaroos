@@ -1,18 +1,38 @@
 // Set the base URL for the airline images.
 const baseURL = 'https://airline.slim.kiwi/logos'
-// Set the default image.
+let imgLink = `${baseURL}/UNKNOWN.png`
+
+function UrlExists(url) {
+    const http = new XMLHttpRequest()
+    http.open('HEAD', url, false)
+    http.send()
+    if (http.status === 404) {
+        imgLink = `${baseURL}/UNKNOWN.png`
+    }
+}
 
 function getAirlineImage(Callsign, OpIcao) {
-    let url = `${baseURL}/UNKNOWN.png`
-    if (OpIcao === undefined) {
-        // Check if the we can find the airline from the callsign.
+    // Set the default image.
+    // Check if we can get Airline from the callsign
+    const checkCallsign = /^([A-Z])\w+\d$/.test(Callsign)
+    // Found an airline in the Callsign
+    if (checkCallsign) {
         const slicedCallsign = Callsign.slice(0, 3)
-        url = `${baseURL}/${slicedCallsign}.png`
+        imgLink = `${baseURL}/${slicedCallsign}.png`
     }
-    if (OpIcao !== undefined) {
-        url = `${baseURL}/${OpIcao}.png`
+    // Did not find an airline in the Callsign
+    if (!checkCallsign) {
+        // Check if we can get Airline from the OpIcao
+        if (OpIcao !== undefined) {
+            imgLink = `${baseURL}/${OpIcao}.png`
+        } else {
+            imgLink = `${baseURL}/PRIVATE.png`
+        }
     }
-    return url
+    // Check if the image exists and override to UNKNOWN if it does not.
+    UrlExists(imgLink)
+
+    return imgLink
 }
 
 export default getAirlineImage
