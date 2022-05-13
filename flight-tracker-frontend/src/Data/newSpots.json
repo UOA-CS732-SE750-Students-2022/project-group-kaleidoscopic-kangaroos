@@ -240,26 +240,6 @@
       "carriers": "1"
     },
     {
-      "code": "NPE",
-      "lat": "-39.4689",
-      "lon": "176.867",
-      "name": "Hawkes Bay Airport",
-      "city": "Napier",
-      "state": "Hawke's Bay",
-      "country": "New Zealand",
-      "woeid": "12515159",
-      "tz": "Pacific\/Auckland",
-      "phone": "",
-      "type": "Airports",
-      "email": "",
-      "url": "",
-      "runway_length": "4300",
-      "elev": "6",
-      "icao": "NZNR",
-      "direct_flights": "3",
-      "carriers": "1"
-    },
-    {
       "code": "NPL",
       "lat": "-39.0067",
       "lon": "174.171",

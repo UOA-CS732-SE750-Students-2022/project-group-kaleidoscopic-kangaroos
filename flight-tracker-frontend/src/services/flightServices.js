@@ -1,15 +1,16 @@
-const axios = require('axios').default;
+const axios = require('axios').default
 
-async function getAllFlights(){
+async function getAllFlights() {
     try {
-        const response = await axios.get('https://aircraft.freeth.kiwi/VirtualRadar/AircraftList.json');
+        const response = await axios.get(
+            'https://aircraft.freeth.kiwi/VirtualRadar/AircraftList.json'
+        )
         // console.log(response);
-        return response.data.acList;
-      } catch (error) {
-        console.error(error);
-        return null;
-      }
+        return response.data.acList
+    } catch (error) {
+        console.error(error)
+        return null
+    }
 }
-
 
 export default getAllFlights

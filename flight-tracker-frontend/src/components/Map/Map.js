@@ -19,7 +19,12 @@ import airports from '../../data/newSpots.json'
  * @param {function} setFlightDetailsVisible used for toggling the visibility of the flight details component.
  * @returns the jsx for the map component.
  */
-function Map({ details, setDetails, flightDetailsVisible, setFlightDetailsVisible }) {
+function Map({
+    details,
+    setDetails,
+    flightDetailsVisible,
+    setFlightDetailsVisible,
+}) {
     // Render the component.
     return (
         <MapContainer
@@ -32,10 +37,12 @@ function Map({ details, setDetails, flightDetailsVisible, setFlightDetailsVisibl
                 details={details}
                 setDetails={setDetails}
                 visible={flightDetailsVisible}
-                setVisible={flightDetailsVisible ? null: setFlightDetailsVisible}
+                setVisible={
+                    flightDetailsVisible ? null : setFlightDetailsVisible
+                }
             />
             <ZoomControl position="topright" />
-            {airports.map(airport => (
+            {airports.map((airport) => (
                 <Marker
                     key={airport.name}
                     position={[airport.lat, airport.lon]}
@@ -56,7 +63,6 @@ function Map({ details, setDetails, flightDetailsVisible, setFlightDetailsVisibl
             ))}
         </MapContainer>
     )
-    
 }
 
 export default Map
