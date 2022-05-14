@@ -18,10 +18,11 @@ import './FlightList.css'
  * @param {function} setVisible sets the visibility of the flight list. Used to close the flight list.
  * @param {function} setDetailsVisible sets the visibility of the flight details component.
  * @param {function} setDetails sets the details of the currently selected plane.
+ * @param {boolean} flightDetailsVisible whether the flight details panel is visible or not.
  * @param {boolean} fullWidth indicates whether the flight list should fill the screen or not.
  * @returns the JSX for the flight list.
  */
-const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) => {
+const FlightList = ({ setVisible, setDetailsVisible, setDetails, flightDetailsVisible, fullWidth }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [flights, setFlights] = useState([]);
     const [selectedFlightId, setSelectedFlightId] = useState(null);
@@ -88,7 +89,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) =>
                                 setDetailsVisible(true)
                                 setSelectedFlightId(flight.Id)
                                 }}
-                                selected={selectedFlightId === flight.Id}>
+                                selected={selectedFlightId === flight.Id && flightDetailsVisible}>
                                 <ListItemAvatar>
                                     <Box
                                         component="img"
