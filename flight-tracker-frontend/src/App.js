@@ -33,7 +33,7 @@ function App() {
     const [currentPlane, setCurrentPlane] = useState([])
 
     // Used for responsiveness.
-    const isTabletOrMobile = useMediaQuery('(max-width: 1223px)');
+    const isMobile = useMediaQuery('(max-width: 970px)');
 
     // The current plane that is being selected.
     let currentState;
@@ -94,10 +94,11 @@ function App() {
                         setVisible={setShowFlightList} 
                         setDetails={setCurrentPlane}
                         setDetailsVisible={setShowFlightDetails}
+                        fullWidth={isMobile}
                     /> : 
                     <FlightListButton 
                         setVisible={setShowFlightList}
-                        text={isTabletOrMobile ? "" : "Flight List"}
+                        text={isMobile ? "" : "Flight List"}
                     />
                 }
 
@@ -105,6 +106,7 @@ function App() {
                     <FlightDetails
                         details={currentState}
                         setVisible={setShowFlightDetails}
+                        fullWidth={isMobile}
                     />
                 ) : null}
             </div>

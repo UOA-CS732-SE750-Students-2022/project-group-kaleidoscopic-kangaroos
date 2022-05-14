@@ -70,7 +70,12 @@ const FlightListRows = (props) => {
     )
 }
 
-const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
+/**
+ * 
+ * @param {boolean} fullWidth indicates whether the flight list should fill the screen or not.
+ * @returns 
+ */
+const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) => {
     tempSetDetails = setDetails
     tempSetDetailsVisible = setDetailsVisible
 
@@ -105,7 +110,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
                 sx={{
                     width: '100%',
                     height: '85%',
-                    maxWidth: 450,
+                    maxWidth: fullWidth ? null : 450,
                     bgcolor: 'background.paper',
                     position: 'fixed',
                     top: '15%',
