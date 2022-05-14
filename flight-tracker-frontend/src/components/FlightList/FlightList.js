@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText'
 import { Slide, IconButton, ListItemAvatar, Typography, CircularProgress } from '@mui/material'
 import { VscChromeClose } from 'react-icons/vsc'
 import getAllFlights from '../../services/flightServices'
-import getAirlineImage from '../../services/ImageHandler/Airline'
+import getAirlineImage from '../../services/airlineServices'
 import './FlightList.css'
 
 /**
