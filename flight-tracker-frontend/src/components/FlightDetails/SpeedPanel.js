@@ -1,11 +1,8 @@
 /* eslint-disable arrow-body-style */
-import {
-    Container,
-    Typography,
-} from '@mui/material'
+import { Container, Typography } from '@mui/material'
 
 // Shows the speed of the plane.
-const SpeedPanel = ({details}) => {
+const SpeedPanel = ({ details }) => {
     return (
         <div className="flightDetailsRow">
             <Container>
@@ -17,7 +14,7 @@ const SpeedPanel = ({details}) => {
                 </Typography>
             </Container>
         </div>
-    );
+    )
 }
 
 export default SpeedPanel

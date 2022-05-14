@@ -11,7 +11,7 @@ import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import { VscChromeClose } from 'react-icons/vsc'
 import getAllFlights from '../../services/flightServices'
-import getAirlineImage from '../ImageHandler/Airline'
+import getAirlineImage from '../../services/airlineServices'
 import './FlightList.css'
 
 let tempData = []

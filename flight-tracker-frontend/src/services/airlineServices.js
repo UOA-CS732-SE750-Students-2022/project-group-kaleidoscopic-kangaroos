@@ -1,8 +1,10 @@
 // Set the base URL for the airline images.
 const baseURL = 'https://airline.slim.kiwi/logos'
+// Set the default image.
 let imgLink = `${baseURL}/UNKNOWN.png`
 
-function UrlExists(url) {
+function checkURL(url) {
+    // if the image does not exist, it will set the image to the placeholder
     const http = new XMLHttpRequest()
     http.open('HEAD', url, false)
     http.send()
@@ -30,7 +32,7 @@ function getAirlineImage(Callsign, OpIcao) {
         }
     }
     // Check if the image exists and override to UNKNOWN if it does not.
-    UrlExists(imgLink)
+    checkURL(imgLink)
 
     return imgLink
 }
