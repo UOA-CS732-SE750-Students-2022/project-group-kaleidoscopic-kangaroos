@@ -7,9 +7,9 @@ import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import { Slide, IconButton, ListItemAvatar, Typography, CircularProgress } from '@mui/material'
+import { Slide, IconButton, ListItemAvatar, Typography, CircularProgress, List } from '@mui/material'
 import { VscChromeClose } from 'react-icons/vsc'
-import getAllFlights from '../../services/flightServices'
+import { getAllFlights } from '../../services/flightServices'
 import getAirlineImage from '../../services/airlineServices'
 import './FlightList.css'
 
@@ -32,7 +32,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, flightDetailsVi
         const updateAllFlightsInterval = setInterval(() => {
             getAllFlights().then((result) => {
                 setIsLoading(false)
-                setFlights(result)
+                setFlights(result.acList)
             })
         }, 1000)
 
@@ -79,39 +79,42 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, flightDetailsVi
                 */
                 isLoading ? 
                     <CircularProgress size="96px" sx={{marginTop: 20}} /> :
-                    flights.map(flight => (
-                        <ListItem
-                            key={flight.Id}
-                            disablePadding
-                        >
-                            <ListItemButton onClick={() => {
-                                setDetails(flight)
-                                setDetailsVisible(true)
-                                setSelectedFlightId(flight.Id)
-                                }}
-                                selected={selectedFlightId === flight.Id && flightDetailsVisible}>
-                                <ListItemAvatar>
-                                    <Box
-                                        component="img"
-                                        sx={{
-                                            height: 32,
-                                            width: 100,
-                                            background: 'white',
-                                            border: '5px solid white',
-                                            borderRadius: '5%',
-                                            marginRight: 2,
+                    <List sx={{maxHeight: '100%', overflow: 'auto'}}>
+                            {flights.map(flight => (
+                                <ListItem
+                                    key={flight.Id}
+                                    disablePadding
+                                >
+                                    <ListItemButton onClick={() => {
+                                        setDetails(flight)
+                                        setDetailsVisible(true)
+                                        setSelectedFlightId(flight.Id)
                                         }}
-                                        alt="Unknown"
-                                        src={getAirlineImage(flight.Call, flight.OpIcao)}
-                                    />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    style={{ color: 'white' }}
-                                    primary={`${flight.Call} - ${flight.Op}`}
-                                />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                                        selected={selectedFlightId === flight.Id && flightDetailsVisible}>
+                                        <ListItemAvatar>
+                                            <Box
+                                                component="img"
+                                                sx={{
+                                                    height: 32,
+                                                    width: 100,
+                                                    background: 'white',
+                                                    border: '5px solid white',
+                                                    borderRadius: '5%',
+                                                    marginRight: 2,
+                                                }}
+                                                alt="Unknown"
+                                                src={getAirlineImage(flight.Call, flight.OpIcao)}
+                                            />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            style={{ color: 'white' }}
+                                            primary={`${flight.Call} - ${flight.Op}`}
+                                        />
+                                    </ListItemButton>
+                                </ListItem>
+                        ))}
+                    </List>
+                }
             </Box>
         </Slide>
     )
