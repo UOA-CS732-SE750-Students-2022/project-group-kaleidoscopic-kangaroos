@@ -5,7 +5,7 @@ import {
 } from '@mui/material'
 import PlayAudio from 'react-simple-audio-player'
 
-import radioChannels from '../../data/atcRadio';
+import radioChannels from '../../data/atcRadio.json';
 
 // Shows radio information about the plane.
 const AtcRadioPanel = ({details}) => {
