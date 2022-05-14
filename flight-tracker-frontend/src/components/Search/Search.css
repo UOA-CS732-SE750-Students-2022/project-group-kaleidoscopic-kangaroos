@@ -13,7 +13,7 @@
 .location {
 
     position: fixed;
-    top: 10px; right: 120px;
+    top: 10px; right: 130px;
     background: blue;
     z-index: 999;
 }

@@ -47,7 +47,7 @@ const Settings = () => {
       content={<>
         
         <b>About</b>
-        <p>Kiwi Flight is a flight tracking company that displays aircraft & flight information in real-time on a map. Kiwi Flight offers flight data such as latitude and longitude positions, origins and destinations, flight numbers, aircraft types, altitudes, headings and speeds.</p>
+        <p>Kiwi Flight is a flight tracking company that displays aircraft and flight information in real-time on a map. Kiwi Flight offers flight data such as latitude and longitude positions, origins and destinations, flight numbers, aircraft types, altitudes, headings and speeds.</p>
        
       </>}
       handleClose={togglePopup}
