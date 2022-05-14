@@ -24,6 +24,7 @@ import './FlightList.css'
 const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [flights, setFlights] = useState([]);
+    const [selectedFlightId, setSelectedFlightId] = useState(null);
 
     // Update the list roughly every second.
     useEffect(() => {
@@ -83,9 +84,11 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) =>
                             disablePadding
                         >
                             <ListItemButton onClick={() => {
-                                setDetails(flight);
+                                setDetails(flight)
                                 setDetailsVisible(true)
-                                }}>
+                                setSelectedFlightId(flight.Id)
+                                }}
+                                selected={selectedFlightId === flight.Id}>
                                 <ListItemAvatar>
                                     <Box
                                         component="img"
