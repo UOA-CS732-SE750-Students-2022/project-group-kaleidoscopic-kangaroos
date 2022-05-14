@@ -1,0 +1,37 @@
+.visually-hidden {
+    
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 1px;
+    
+    
+}
+
+.location {
+
+    position: fixed;
+    top: 10px; right: 120px;
+    background: blue;
+    z-index: 999;
+}
+
+ul {
+    text-align: left;
+    width: 400px;
+}
+
+input {
+    height: 27px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 20px;
+}
+button {
+    height: 30px;
+    margin: 0px;
+    padding: 0px;
+    font-size: 20px;
+}

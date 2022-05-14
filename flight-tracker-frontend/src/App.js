@@ -7,6 +7,7 @@ import FlightDetails from './components/FlightDetails/FlightDetails'
 import Settings from './components/Settings/Settings'
 import FlightList from './components/FlightList/FlightList'
 import FlightListButton from './components/FlightListButton/FlightListButton'
+import Search from './components/Search/Search'
 
 const theme = createTheme({
     palette: {
@@ -56,10 +57,8 @@ function App() {
                     visible={showFlightDetails}
                     setVisible={setShowFlightDetails}
                 />
-                < Settings
-               
-                
-                />
+                < Settings/>
+                <Search/>
 
                 {showFlightList ?
                     <FlightList 

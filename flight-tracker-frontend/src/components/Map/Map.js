@@ -9,7 +9,7 @@ import {
 } from 'react-leaflet'
 import L from 'leaflet'
 import Planes from '../Planes/Planes'
-import hotSpotData from '../../Data/newSpots.json'
+import hotSpotData from '../../data/newSpots.json'
 
 function Map({ details, setDetails, visible, setVisible }) {
     if (visible) {
