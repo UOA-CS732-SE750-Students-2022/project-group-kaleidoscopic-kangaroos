@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-import { useMediaQuery } from 'react-responsive'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import Settings from './components/Settings/Settings'
@@ -33,7 +33,7 @@ function App() {
     const [currentPlane, setCurrentPlane] = useState([])
 
     // Used for responsiveness.
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1223px)'});
+    const isTabletOrMobile = useMediaQuery('(max-width: 1223px)');
 
     // The current plane that is being selected.
     let currentState;
