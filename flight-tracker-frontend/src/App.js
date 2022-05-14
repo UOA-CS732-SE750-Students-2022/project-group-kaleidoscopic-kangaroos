@@ -7,6 +7,7 @@ import FlightDetails from './components/FlightDetails/FlightDetails'
 import Settings from './components/Settings/Settings'
 import FlightList from './components/FlightList/FlightList'
 import FlightListButton from './components/FlightListButton/FlightListButton'
+import MainLogo from './components/MainLogo/MainLogo'
 
 /**
  * Used to define the general color scheme for components.
@@ -66,12 +67,16 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
+                
                 <Map
                     details={currentPlane}
                     setDetails={setCurrentPlane}
                     flightDetailsVisible={showFlightDetails}
                     setFlightDetailsVisible={setShowFlightDetails}
                 />
+
+                <MainLogo/>
+
                 < Settings />
 
                 {showFlightList ?

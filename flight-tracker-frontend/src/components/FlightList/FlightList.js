@@ -104,11 +104,11 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
                 index="FlightListBox"
                 sx={{
                     width: '100%',
-                    height: '100%',
+                    height: '85%',
                     maxWidth: 450,
                     bgcolor: 'background.paper',
                     position: 'fixed',
-                    top: '10%',
+                    top: '15%',
                     left: '0',
                     zIndex: '999',
                     borderTopRightRadius: 8,
