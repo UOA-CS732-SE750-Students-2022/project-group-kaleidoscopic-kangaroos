@@ -20,9 +20,7 @@ function getPlaneImage(planeRego) {
                 imgLink = plane
             }
         })
-        .catch((error) => {
-            console.log(error)
-        })
+        .catch(() => plane)
 
     return imgLink
 }

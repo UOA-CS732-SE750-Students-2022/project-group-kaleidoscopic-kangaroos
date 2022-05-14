@@ -1,6 +1,5 @@
 import { Container, Paper, Typography } from '@mui/material'
 import getPlaneImage from '../../services/planeServices'
-import plane from '../../images/plane-placeholder.png'
 
 /* eslint-disable arrow-body-style */
 
@@ -10,7 +9,7 @@ const GeneralPanel = ({ details }) => {
     return (
         <div className="flightDetailsRow">
             <Paper variant="outlined" className="planeImageContainer">
-                <img src={planeImage} alt={plane} className="planeImage" />
+                <img src={planeImage} alt="A plane" className="planeImage" />
             </Paper>
             <Container>
                 <Typography>
