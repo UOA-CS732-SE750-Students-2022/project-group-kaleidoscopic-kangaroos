@@ -7,7 +7,7 @@ import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
+import { Slide, IconButton, ListItemAvatar, Typography, CircularProgress } from '@mui/material'
 import { VscChromeClose } from 'react-icons/vsc'
 import getAllFlights from '../../services/flightServices'
 import getAirlineImage from '../ImageHandler/Airline'
@@ -19,12 +19,14 @@ import './FlightList.css'
  * @returns 
  */
 const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) => {
+    const [isLoading, setIsLoading] = useState(true);
     const [flights, setFlights] = useState([]);
 
     // Update the list roughly every second.
     useEffect(() => {
         const updateAllFlightsInterval = setInterval(() => {
             getAllFlights().then((result) => {
+                setIsLoading(false)
                 setFlights(result)
             })
         }, 1000)
@@ -48,6 +50,9 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) =>
                     zIndex: '999',
                     borderTopRightRadius: 8,
                     borderBottomRightRadius: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
                 }}
             >
                 <div className="flightListTitleRow">
@@ -63,7 +68,9 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) =>
                     </IconButton>
                 </div>
                 
-                {flights.map(flight => (
+                {isLoading ? 
+                    <CircularProgress size="96px" sx={{marginTop: 20}} /> :
+                    flights.map(flight => (
                         <ListItem
                             key={flight.Id}
                             disablePadding
