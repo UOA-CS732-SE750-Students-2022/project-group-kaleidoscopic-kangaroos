@@ -1,18 +1,16 @@
-/* eslint-disable arrow-body-style */
-import {
-    Container,
-    Paper,
-    Typography,
-} from '@mui/material'
-import plane from '../../images/plane-placeholder.jpg'
+import { Container, Paper, Typography } from '@mui/material'
+import getPlaneImage from '../../services/planeServices'
+import plane from '../../images/plane-placeholder.png'
 
+/* eslint-disable arrow-body-style */
 
 // Shows General information about the plane.
-const GeneralPanel = ({details}) => {
+const GeneralPanel = ({ details }) => {
+    const planeImage = getPlaneImage(details.rego)
     return (
         <div className="flightDetailsRow">
             <Paper variant="outlined" className="planeImageContainer">
-                <img src={plane} alt="a plane" className="planeImage" />
+                <img src={planeImage} alt={plane} className="planeImage" />
             </Paper>
             <Container>
                 <Typography>
@@ -38,7 +36,7 @@ const GeneralPanel = ({details}) => {
                 </Typography>
             </Container>
         </div>
-    );
+    )
 }
 
 export default GeneralPanel
