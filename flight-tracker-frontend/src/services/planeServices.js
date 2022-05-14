@@ -1,4 +1,4 @@
-import plane from '../images/plane-placeholder.png'
+import plane from '../images/plane-placeholder.jpg'
 
 const baseURL = `https://www.airport-data.com/api/ac_thumb.json?r=`
 const axios = require('axios').default
