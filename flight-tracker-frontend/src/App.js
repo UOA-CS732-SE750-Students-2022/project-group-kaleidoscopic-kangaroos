@@ -45,6 +45,7 @@ function App() {
             type: currentPlane.Type,
             rego: currentPlane.Reg,
             op: currentPlane.Op,
+            icao: currentPlane.Icao,
         }
     } else {
         currentState = {
@@ -59,6 +60,7 @@ function App() {
             type: 'Not selected',
             rego: `Not selected`,
             Op: 'Not selected',
+            icao: 'Not selected',
         }
     }
 

@@ -1,22 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
-import getAllFlights from '../../services/flightServices'
+import { getAllFlights, updateAllFlights } from '../../services/flightServices'
 import getAirlineImage from '../../services/airlineServices'
 
 let allFlights = []
+let lastDV = 0
 
 function Planes({ details, setDetails, visible, setVisible }) {
-    const [isLoading, setLoading] = React.useState(true)
+    const [isLoading, setLoading] = useState(true)
+
+    getAllFlights().then((result) => {
+        allFlights = result.acList.filter((item) => item.Lat)
+        lastDV = result.lastDv
+    })
 
     const getAllNodes = () => {
-        getAllFlights().then((result) => {
+        updateAllFlights(lastDV).then((result) => {
             allFlights = result.filter((item) => item.Lat)
             setLoading(false)
         })
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         setInterval(() => {
             setLoading(true)
         }, 1000)
@@ -26,7 +32,7 @@ function Planes({ details, setDetails, visible, setVisible }) {
         getAllNodes()
     }
 
-    const imgLink = getAirlineImage(details.Callsign, details.OpIcao)
+    const imgLink = getAirlineImage(details.Call, details.OpIcao)
 
     return (
         <>
@@ -53,11 +59,13 @@ function Planes({ details, setDetails, visible, setVisible }) {
                                 className="planeImage"
                             />
                             <br />
-                            Callsign - {item.Call}
+                            <b>Callsign:&ensp;</b> {item.Call}
                             <br />
-                            Altitude - {item.Alt}
+                            <b>Altitude:&ensp;</b>
+                            {item.Alt}
                             <br />
-                            Speed - {item.Spd}
+                            <b>Speed:&ensp;</b>
+                            {item.Spd}
                             <br />
                             {item.Mdl}
                         </Popup>

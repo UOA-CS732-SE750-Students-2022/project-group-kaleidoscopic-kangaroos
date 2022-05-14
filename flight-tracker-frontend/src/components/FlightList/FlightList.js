@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText'
 import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
 import { FixedSizeList } from 'react-window'
 import { VscChromeClose } from 'react-icons/vsc'
-import getAllFlights from '../../services/flightServices'
+import { getAllFlights } from '../../services/flightServices'
 import getAirlineImage from '../../services/airlineServices'
 import './FlightList.css'
 
@@ -62,8 +62,7 @@ const FlightListRows = (props) => {
                     />
                 </ListItemAvatar>
                 <ListItemText
-                    type="subheading"
-                    style={{ color: 'white', left: '5' }}
+                    style={{ color: 'white' }}
                     primary={`${callsign} - ${op}`}
                 />
             </ListItemButton>
@@ -79,7 +78,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
 
     const getAllNodes = () => {
         getAllFlights().then((result) => {
-            tempData = result
+            tempData = result.acList
             if (tempData === undefined) {
                 // Do Nothing!
             } else if (tempData !== undefined) {
@@ -92,7 +91,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
     useEffect(() => {
         setInterval(() => {
             setLoading(true)
-        }, 2000)
+        }, 100)
     }, [])
 
     if (isLoading) {

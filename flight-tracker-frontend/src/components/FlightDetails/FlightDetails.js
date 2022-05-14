@@ -15,6 +15,7 @@ import SpeedPanel from './SpeedPanel'
 import AltitudePanel from './AltitudePanel'
 import AtcRadioPanel from './AtcRadioPanel'
 import './FlightDetails.css'
+import getAirlineImage from '../../services/airlineServices'
 
 /**
  * Show the details for a selected flight.
@@ -22,6 +23,7 @@ import './FlightDetails.css'
  * @param {boolean} setVisible used to set the FlightDetails component invisible.
  * @returns the jsx for the component that will be rendered.
  */
+
 const FlightDetails = ({ details, setVisible }) => {
     const [selectedPanel, setSelectedPanel] = useState('General')
 
@@ -48,6 +50,7 @@ const FlightDetails = ({ details, setVisible }) => {
     } else if (selectedPanel === 'ATC') {
         contents = <AtcRadioPanel details={details} />
     }
+    const imgLink = getAirlineImage(details.Call, details.OpIcao)
 
     // Render the components.
     return (
@@ -55,8 +58,17 @@ const FlightDetails = ({ details, setVisible }) => {
             <Slide direction="up" in timeout={300}>
                 <Card className="flightDetailsDiv" elevation={0}>
                     <div className="flightDetailsRow">
-                        <Typography variant="h4">{details.callsign}</Typography>
-                        <Typography variant="h6">{details.op}</Typography>
+                        <Typography variant="img">
+                            <img
+                                src={imgLink}
+                                alt={details.Op}
+                                className="planeImage"
+                            />
+                        </Typography>
+                        <Typography variant="h5">
+                            <b>{details.callsign}</b>
+                            {details.Icao}
+                        </Typography>
                         <IconButton
                             color="primary"
                             size="large"
