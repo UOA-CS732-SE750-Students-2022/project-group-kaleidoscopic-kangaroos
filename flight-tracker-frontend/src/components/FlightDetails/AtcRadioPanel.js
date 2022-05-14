@@ -5,7 +5,7 @@ import {
 } from '@mui/material'
 import PlayAudio from 'react-simple-audio-player'
 
-import radioChannels from '../../Data/atcRadio.json'
+import radioChannels from '../../data/atcRadio.json'
 
 
 
