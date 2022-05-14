@@ -1,4 +1,5 @@
-[
+module.exports = {
+    "radioChannels":
     {
         "display_name": "Auckland Mandatory Broadcast Zone",
         "display_freq": 120.4,
@@ -9,4 +10,4 @@
         "stream_type": "audio/mpeg",
         "stream_url": "https://radio.ad2.freeth.kiwi:8000/Waikato_Police_Rural_2"
     }
-]
+}
