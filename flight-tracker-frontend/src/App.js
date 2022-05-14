@@ -18,7 +18,7 @@ const theme = createTheme({
     palette: {
         mode: 'dark',
         background: { paper: '#222431' },
-    },
+    }
 })
 
 function App() {
