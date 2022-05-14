@@ -13,7 +13,7 @@ const mockState = {
     engines: 'Twin turbo',
 }
 
-it('renders flight details panel correctly', () => {
+it('Renders Flight Details panel correctly.', () => {
     const {queryByText} = render(<FlightDetails details={mockState} />);
 
     expect(queryByText("Plane Test123")).toBeTruthy();
@@ -24,7 +24,7 @@ it('renders flight details panel correctly', () => {
     expect(queryByText("ATC Radio")).toBeTruthy();
 });
 
-it('renders general pane correctly', () => {
+it('Renders general pane correctly.', () => {
     const {queryByText} = render(<FlightDetails details={mockState} />);
 
     expect(queryByText("Altitude:")).toBeTruthy();
@@ -44,7 +44,7 @@ it('renders general pane correctly', () => {
     expect(queryByText("Twin turbo")).toBeTruthy();
 })
 
-it('switches to spatial panel correctly', () => {
+it('Switches to spatial panel correctly.', () => {
     const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
 
     const spatialButton = queryByRole("button", {
@@ -72,7 +72,7 @@ it('switches to spatial panel correctly', () => {
     expect(queryByText("Twin turbo")).toBeFalsy();
 });
 
-it('switches to speed panel correctly', () => {
+it('Switches to speed panel correctly.', () => {
     const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
 
     const speedButton = queryByRole("button", {
@@ -99,7 +99,7 @@ it('switches to speed panel correctly', () => {
     expect(queryByText("Twin turbo")).toBeFalsy();
 });
 
-it('switches to altitude panel correctly', () => {
+it('Switches to altitude panel correctly.', () => {
     const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
 
     const altitudeButton = queryByRole("button", {
@@ -125,7 +125,7 @@ it('switches to altitude panel correctly', () => {
     expect(queryByText("Twin turbo")).toBeFalsy();
 });
 
-it('switches to ATC radio panel correctly', () => {
+it('Switches to ATC radio panel correctly.', () => {
     const {queryByText, queryByRole} = render(<FlightDetails details={mockState} />);
 
     const atcRadioButton = queryByRole("button", {

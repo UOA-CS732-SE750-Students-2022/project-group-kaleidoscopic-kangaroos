@@ -9,45 +9,23 @@ import {
 } from 'react-leaflet'
 import L from 'leaflet'
 import Planes from '../Planes/Planes'
-import hotSpotData from '../../data/newSpots.json'
+import airports from '../../data/newSpots.json'
 
-function Map({ details, setDetails, visible, setVisible }) {
-    if (visible) {
-        return (
-            <MapContainer
-                center={[-37.0082, 174.785]}
-                zoom={13}
-                zoomControl={false}
-            >
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <Planes
-                    details={details}
-                    setDetails={setDetails}
-                    visible={visible}
-                />
-                <ZoomControl position="topright" />
-                {hotSpotData.map((hotspot) => (
-                    <Marker
-                        key={hotspot.name}
-                        position={[hotspot.lat, hotspot.lon]}
-                        icon={L.divIcon({
-                            iconSize: [64, 79],
-                            iconAnchor: [32, 79],
-                            className: 'yourClassName',
-                            html: `<img 
-                            height="79" 
-                            width="64"
-            src='/airporticon.png'>`,
-                        })}
-                    >
-                        <Popup offset={new L.Point(0, -50)}>
-                            <h4>{hotspot.name}</h4>
-                        </Popup>
-                    </Marker>
-                ))}
-            </MapContainer>
-        )
-    }
+/**
+ * Shows the map of the world. Also labels the location of planes that are tracked.
+ * @param {object} details the details of the currently selected plane.
+ * @param {function} setDetails the function used to change the selected plane.
+ * @param {boolean} flightDetailsVisible whether the flight details pane is visible or not.
+ * @param {function} setFlightDetailsVisible used for toggling the visibility of the flight details component.
+ * @returns the jsx for the map component.
+ */
+function Map({
+    details,
+    setDetails,
+    flightDetailsVisible,
+    setFlightDetailsVisible,
+}) {
+    // Render the component.
     return (
         <MapContainer
             center={[-37.0082, 174.785]}
@@ -58,14 +36,16 @@ function Map({ details, setDetails, visible, setVisible }) {
             <Planes
                 details={details}
                 setDetails={setDetails}
-                visible={visible}
-                setVisible={setVisible}
+                visible={flightDetailsVisible}
+                setVisible={
+                    flightDetailsVisible ? null : setFlightDetailsVisible
+                }
             />
             <ZoomControl position="topright" />
-            {hotSpotData.map((hotspot) => (
+            {airports.map((airport) => (
                 <Marker
-                    key={hotspot.name}
-                    position={[hotspot.lat, hotspot.lon]}
+                    key={airport.name}
+                    position={[airport.lat, airport.lon]}
                     icon={L.divIcon({
                         iconSize: [64, 79],
                         iconAnchor: [32, 79],
@@ -77,7 +57,7 @@ function Map({ details, setDetails, visible, setVisible }) {
                     })}
                 >
                     <Popup offset={new L.Point(0, -50)}>
-                        <h4>{hotspot.name}</h4>
+                        <h4>{airport.name}</h4>
                     </Popup>
                 </Marker>
             ))}

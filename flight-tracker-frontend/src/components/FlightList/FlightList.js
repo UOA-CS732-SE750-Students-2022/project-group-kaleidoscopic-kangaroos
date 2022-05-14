@@ -1,127 +1,121 @@
 // TODO
-// - Dynamically update airline logos
-// - Dynamic Positioning of Flight List
 // - Fix Up Styling of List -- Include more INFO like, LogLang or Speed?
 // - Header and Footer of List showing update time
 
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
-import { FixedSizeList } from 'react-window'
-import { VscChromeClose } from 'react-icons/vsc';
+import { Slide, IconButton, ListItemAvatar, Typography, CircularProgress } from '@mui/material'
+import { VscChromeClose } from 'react-icons/vsc'
 import getAllFlights from '../../services/flightServices'
-import Logo from '../../images/airlineLogo-placeholder.png'
+import getAirlineImage from '../ImageHandler/Airline'
 import './FlightList.css'
 
+/**
+ * Shows a list of the all the flights that are currently tracked.
+ * @param {function} setVisible sets the visibility of the flight list. Used to close the flight list.
+ * @param {function} setDetailsVisible sets the visibility of the flight details component.
+ * @param {function} setDetails sets the details of the currently selected plane.
+ * @param {boolean} flightDetailsVisible whether the flight details panel is visible or not.
+ * @param {boolean} fullWidth indicates whether the flight list should fill the screen or not.
+ * @returns the JSX for the flight list.
+ */
+const FlightList = ({ setVisible, setDetailsVisible, setDetails, flightDetailsVisible, fullWidth }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [flights, setFlights] = useState([]);
+    const [selectedFlightId, setSelectedFlightId] = useState(null);
 
-let tempData = []
-let tempSetDetails
-let tempSetDetailsVisible
-
-function updateDetails(props) {
-    tempSetDetails(props)
-    tempSetDetailsVisible(true)
-}
-
-const FlightListRows = (props) => {
-    const { index, style } = props
-
-    return (
-        <ListItem
-            style={style}
-            key={tempData[index].Id}
-            component="div"
-            disablePadding
-        >
-            <ListItemButton onClick={() => updateDetails(tempData[index])}>
-                <ListItemAvatar>
-                    <Box
-                        component="img"
-                        sx={{
-                            height: 32,
-                        }}
-                        alt="LOGO HERE"
-                        src={Logo}
-                    />
-                </ListItemAvatar>
-                <ListItemText
-                    style={{ color: 'white' }}
-                    primary={`${tempData[index].Call} - ${tempData[index].Op}`}
-                />
-            </ListItemButton>
-        </ListItem>
-    )
-}
-
-const FlightList = ({setVisible, setDetailsVisible, setDetails}) => {
-    tempSetDetails = setDetails
-    tempSetDetailsVisible = setDetailsVisible
-
-    const [isLoading, setLoading] = useState(true)
-
-    const getAllNodes = () => {
-        getAllFlights().then((result) => {
-            tempData = result
-            if (tempData === undefined) {
-                // Do Nothing!
-            } else if (tempData !== undefined) {
-                tempData.pop()
-            }
-            setLoading(false)
-        })
-    }
-
+    // Update the list roughly every second.
     useEffect(() => {
-        setInterval(() => {
-            setLoading(true)
+        const updateAllFlightsInterval = setInterval(() => {
+            getAllFlights().then((result) => {
+                setIsLoading(false)
+                setFlights(result)
+            })
         }, 1000)
+
+        return () => clearInterval(updateAllFlightsInterval);
     }, [])
 
-    if (isLoading) {
-        getAllNodes()
-    }
-
+    // Render the component.
     return (
         <Slide direction="right" in timeout={1000}>
             <Box
                 index="FlightListBox"
                 sx={{
                     width: '100%',
-                    height: 800,
-                    maxWidth: 400,
+                    height: '85%',
+                    maxWidth: fullWidth ? null : 450,
                     bgcolor: 'background.paper',
                     position: 'fixed',
-                    bottom: '10%',
+                    top: '15%',
                     left: '0',
                     zIndex: '999',
                     borderTopRightRadius: 8,
                     borderBottomRightRadius: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
                 }}
             >
                 <div className="flightListTitleRow">
-                    <Typography variant="h3" sx={{color:"white"}}>
+                    <Typography variant="h3" sx={{ color: 'white' }}>
                         Flight List
                     </Typography>
-                    <IconButton color="primary" size='large' onClick={() => setVisible(false)}>
+                    <IconButton
+                        color="primary"
+                        size="medium"
+                        onClick={() => setVisible(false)}
+                    >
                         <VscChromeClose />
                     </IconButton>
                 </div>
                 
-                <FixedSizeList
-                    height={800}
-                    width={400}
-                    itemSize={45}
-                    itemCount={tempData.length}
-                    overscanCount={5}
-                >
-                    {FlightListRows}
-                </FixedSizeList>
+                { /*
+                While the data is loading, we show the circular progress.
+                If the flight data has been loaded, we render all the list elements.
+                */
+                isLoading ? 
+                    <CircularProgress size="96px" sx={{marginTop: 20}} /> :
+                    flights.map(flight => (
+                        <ListItem
+                            key={flight.Id}
+                            disablePadding
+                        >
+                            <ListItemButton onClick={() => {
+                                setDetails(flight)
+                                setDetailsVisible(true)
+                                setSelectedFlightId(flight.Id)
+                                }}
+                                selected={selectedFlightId === flight.Id && flightDetailsVisible}>
+                                <ListItemAvatar>
+                                    <Box
+                                        component="img"
+                                        sx={{
+                                            height: 32,
+                                            width: 100,
+                                            background: 'white',
+                                            border: '5px solid white',
+                                            borderRadius: '5%',
+                                            marginRight: 2,
+                                        }}
+                                        alt="Unknown"
+                                        src={getAirlineImage(flight.Call, flight.OpIcao)}
+                                    />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    style={{ color: 'white' }}
+                                    primary={`${flight.Call} - ${flight.Op}`}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
             </Box>
         </Slide>
     )
 }
 
 export default FlightList
+                         

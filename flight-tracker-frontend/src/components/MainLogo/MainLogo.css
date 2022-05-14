@@ -1,0 +1,7 @@
+.mainLogo {
+    position: fixed;
+    top: 10px; left: 10px;
+    width: auto;
+    height: 12%;
+    z-index: 999;
+}
