@@ -9,7 +9,7 @@ import {
 } from 'react-leaflet'
 import L from 'leaflet'
 import Planes from '../Planes/Planes'
-import airports from '../../data/newSpots.json'
+import airports from '../../zdata/newSpots.json'
 
 /**
  * Shows the map of the world. Also labels the location of planes that are tracked.
