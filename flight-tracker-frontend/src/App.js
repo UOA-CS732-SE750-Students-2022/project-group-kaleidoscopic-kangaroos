@@ -8,6 +8,7 @@ import FlightDetails from './components/FlightDetails/FlightDetails'
 import Settings from './components/Settings/Settings'
 import FlightList from './components/FlightList/FlightList'
 import FlightListButton from './components/FlightListButton/FlightListButton'
+import MainLogo from './components/MainLogo/MainLogo'
 
 
 /**
@@ -38,6 +39,7 @@ function App() {
     let currentState;
 
     // Used to format plane data so that is usable in other components.
+    // console.log(currentPlane)
     if (showFlightDetails) {
         currentState = {
             callsign: currentPlane.Call,
@@ -48,6 +50,8 @@ function App() {
             distance: 18582.58,
             squawk: currentPlane.Sqk,
             engines: 'Twin turbo',
+            latitude: currentPlane.Lat,
+            longitude: currentPlane.Long
         }
     }
     else {
@@ -60,6 +64,8 @@ function App() {
             distance: 0,
             squawk: 0,
             engines: 'Not selected',
+            latitude: null,
+            longitude: null
         }
     }
 
@@ -71,12 +77,16 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
+                
                 <Map
                     details={currentPlane}
                     setDetails={setCurrentPlane}
                     flightDetailsVisible={showFlightDetails}
                     setFlightDetailsVisible={setShowFlightDetails}
                 />
+
+                <MainLogo/>
+
                 < Settings />
 
                 {showFlightList ?
