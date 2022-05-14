@@ -52,7 +52,10 @@ function Planes({ details, setDetails, visible, setVisible }) {
                         eventHandlers={{
                             click: () => {
                                 setDetails(item)
-                                setVisible(true)
+                                // Show the flight details panel.
+                                if (!visible) {
+                                    setVisible(true)
+                                }
                             },
                         }}
                         icon={L.divIcon({
