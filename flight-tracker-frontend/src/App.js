@@ -94,6 +94,7 @@ function App() {
                         setVisible={setShowFlightList} 
                         setDetails={setCurrentPlane}
                         setDetailsVisible={setShowFlightDetails}
+                        flightDetailsVisible={showFlightDetails}
                         fullWidth={isMobile}
                     /> : 
                     <FlightListButton 
