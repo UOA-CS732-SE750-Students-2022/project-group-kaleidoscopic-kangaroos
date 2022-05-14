@@ -7,6 +7,27 @@
         "location_limit_N": -36.69,
         "location_limit_S": -37.3,
         "stream_type": "audio/mpeg",
+        "stream_url": "https://radio.ad2.freeth.kiwi:8000/NZAA_CTR"
+    },
+    {
+        "display_name": "Taupo Mandatory Broadcast Zone",
+        "display_freq": 118.4,
+        "location_limit_E": 174.5,
+        "location_limit_W": 173.5,
+        "location_limit_N": -38.0,
+        "location_limit_S": -39.0,
+        "stream_type": "audio/mpeg",
+        "stream_url": "https://radio.ad2.freeth.kiwi:8000/Waikato_Police_Rural_2"
+    },
+    {
+        "display_name": "Hamilton Tower",
+        "display_freq": 126.8,
+        "location_limit_E": 175.0,
+        "location_limit_W": 174.0,
+        "location_limit_N": -37.0,
+        "location_limit_S": -38,
+        "stream_type": "audio/mpeg",
         "stream_url": "https://radio.ad2.freeth.kiwi:8000/Waikato_Police_Rural_2"
     }
+
 ]
