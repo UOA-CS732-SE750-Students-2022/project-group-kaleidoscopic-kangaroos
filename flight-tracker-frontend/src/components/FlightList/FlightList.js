@@ -8,67 +8,10 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { Slide, IconButton, ListItemAvatar, Typography } from '@mui/material'
-import { FixedSizeList } from 'react-window'
 import { VscChromeClose } from 'react-icons/vsc'
 import getAllFlights from '../../services/flightServices'
 import getAirlineImage from '../ImageHandler/Airline'
 import './FlightList.css'
-
-let tempData = []
-let tempSetDetails
-let tempSetDetailsVisible
-let windowHeight = window.innerHeight
-// let windowWidth = window.innerWidth
-
-function updateDetails(props) {
-    tempSetDetails(props)
-    tempSetDetailsVisible(true)
-}
-
-function reportWindowSize() {
-    windowHeight = window.innerHeight
-    // windowWidth = window.innerWidth
-}
-window.onresize = reportWindowSize
-
-const FlightListRows = (props) => {
-    const { index, style } = props
-    const callsign = tempData[index].Call
-    const opicao = tempData[index].OpIcao
-    const op = tempData[index].Op
-
-    const imgAirline = getAirlineImage(callsign, opicao)
-
-    return (
-        <ListItem
-            style={style}
-            key={tempData[index].Id}
-            component="div"
-            disablePadding
-        >
-            <ListItemButton onClick={() => updateDetails(tempData[index])}>
-                <ListItemAvatar>
-                    <Box
-                        component="img"
-                        sx={{
-                            height: 32,
-                            width: 100,
-                            background: 'white',
-                            border: '5px solid white',
-                            borderRadius: '5%',
-                        }}
-                        alt="Unknown"
-                        src={imgAirline}
-                    />
-                </ListItemAvatar>
-                <ListItemText
-                    style={{ color: 'white' }}
-                    primary={`${callsign} - ${op}`}
-                />
-            </ListItemButton>
-        </ListItem>
-    )
-}
 
 /**
  * 
@@ -76,33 +19,20 @@ const FlightListRows = (props) => {
  * @returns 
  */
 const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) => {
-    tempSetDetails = setDetails
-    tempSetDetailsVisible = setDetailsVisible
+    const [flights, setFlights] = useState([]);
 
-    const [isLoading, setLoading] = useState(true)
-
-    const getAllNodes = () => {
-        getAllFlights().then((result) => {
-            tempData = result
-            if (tempData === undefined) {
-                // Do Nothing!
-            } else if (tempData !== undefined) {
-                tempData.pop()
-            }
-            setLoading(false)
-        })
-    }
-
+    // Update the list roughly every second.
     useEffect(() => {
-        setInterval(() => {
-            setLoading(true)
-        }, 100)
+        const updateAllFlightsInterval = setInterval(() => {
+            getAllFlights().then((result) => {
+                setFlights(result)
+            })
+        }, 1000)
+
+        return () => clearInterval(updateAllFlightsInterval);
     }, [])
 
-    if (isLoading) {
-        getAllNodes()
-    }
-
+    // Render the component.
     return (
         <Slide direction="right" in timeout={1000}>
             <Box
@@ -132,19 +62,42 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, fullWidth }) =>
                         <VscChromeClose />
                     </IconButton>
                 </div>
-
-                <FixedSizeList
-                    height={windowHeight}
-                    width={450}
-                    itemSize={50}
-                    itemCount={tempData.length}
-                    overscanCount={5}
-                >
-                    {FlightListRows}
-                </FixedSizeList>
+                
+                {flights.map(flight => (
+                        <ListItem
+                            key={flight.Id}
+                            disablePadding
+                        >
+                            <ListItemButton onClick={() => {
+                                setDetails(flight);
+                                setDetailsVisible(true)
+                                }}>
+                                <ListItemAvatar>
+                                    <Box
+                                        component="img"
+                                        sx={{
+                                            height: 32,
+                                            width: 100,
+                                            background: 'white',
+                                            border: '5px solid white',
+                                            borderRadius: '5%',
+                                            marginRight: 2,
+                                        }}
+                                        alt="Unknown"
+                                        src={getAirlineImage(flight.Call, flight.OpIcao)}
+                                    />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    style={{ color: 'white' }}
+                                    primary={`${flight.Call} - ${flight.Op}`}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
             </Box>
         </Slide>
     )
 }
 
 export default FlightList
+                         
