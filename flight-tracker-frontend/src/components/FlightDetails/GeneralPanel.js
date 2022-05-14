@@ -1,10 +1,8 @@
-/* eslint-disable arrow-body-style */
 import { Container, Paper, Typography } from '@mui/material'
 import getPlaneImage from '../../services/planeServices'
 
 // Shows General information about the plane.
 const GeneralPanel = ({ details }) => {
-    console.log(details)
     const planeImage = getPlaneImage(details.rego)
 
     return (
