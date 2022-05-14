@@ -1,13 +1,20 @@
+import axios from 'axios'
+
 // Set the base URL for the airline images.
 const baseURL = 'https://airline.slim.kiwi/logos'
+// Set the default image.
 let imgLink = `${baseURL}/UNKNOWN.png`
 
-function UrlExists(url) {
-    const http = new XMLHttpRequest()
-    http.open('HEAD', url, false)
-    http.send()
-    if (http.status === 404) {
-        imgLink = `${baseURL}/UNKNOWN.png`
+function checkURL(url) {
+    try {
+        axios.get(url).then((response) => {
+            if (response.status === 404) {
+                imgLink = `${baseURL}/UNKNOWN.png`
+            }
+        })
+        // console.log(response);
+    } catch (error) {
+        console.error(error)
     }
 }
 
@@ -30,7 +37,7 @@ function getAirlineImage(Callsign, OpIcao) {
         }
     }
     // Check if the image exists and override to UNKNOWN if it does not.
-    UrlExists(imgLink)
+    checkURL(imgLink)
 
     return imgLink
 }
