@@ -41,7 +41,7 @@ function Map({
                     flightDetailsVisible ? null : setFlightDetailsVisible
                 }
             />
-            <ZoomControl position="topright" />
+            <ZoomControl position='topright'/>
             {airports.map((airport) => (
                 <Marker
                     key={airport.name}
