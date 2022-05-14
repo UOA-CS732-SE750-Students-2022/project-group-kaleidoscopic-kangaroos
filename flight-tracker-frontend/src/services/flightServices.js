@@ -54,4 +54,3 @@ async function updateFlight(Icao, lastDv) {
 }
 
 export { getAllFlights, updateAllFlights, getFlight, updateFlight }
-export default getAllFlights

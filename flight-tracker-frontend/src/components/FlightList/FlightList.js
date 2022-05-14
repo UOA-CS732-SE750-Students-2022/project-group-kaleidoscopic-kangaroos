@@ -9,7 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { Slide, IconButton, ListItemAvatar, Typography, CircularProgress, List } from '@mui/material'
 import { VscChromeClose } from 'react-icons/vsc'
-import getAllFlights from '../../services/flightServices'
+import { getAllFlights } from '../../services/flightServices'
 import getAirlineImage from '../../services/airlineServices'
 import './FlightList.css'
 
@@ -32,7 +32,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails, flightDetailsVi
         const updateAllFlightsInterval = setInterval(() => {
             getAllFlights().then((result) => {
                 setIsLoading(false)
-                setFlights(result)
+                setFlights(result.acList)
             })
         }, 1000)
 
