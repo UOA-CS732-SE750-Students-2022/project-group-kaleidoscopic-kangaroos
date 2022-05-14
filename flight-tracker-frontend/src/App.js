@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
@@ -24,14 +23,14 @@ function App() {
     Stores the current state of the app.
     */
     // Whether the Flight list is visible or not.
-    const [showFlightList, setShowFlightList] = useState(false);
+    const [showFlightList, setShowFlightList] = useState(false)
     // Whether the Flight details component is visible or not.
     const [showFlightDetails, setShowFlightDetails] = useState(false)
     // The current plane that is selected in the map or list.
     const [currentPlane, setCurrentPlane] = useState([])
 
     // The current plane that is being selected.
-    let currentState;
+    let currentState
 
     // Used to format plane data so that is usable in other components.
     if (showFlightDetails) {
@@ -41,21 +40,25 @@ function App() {
             vSpeed: 20,
             hSpeed: Math.round(currentPlane.Spd * 1.60934),
             heading: currentPlane.Trak,
-            distance: 18582.58,
             squawk: currentPlane.Sqk,
-            engines: 'Twin turbo',
+            engines: currentPlane.Engines,
+            type: currentPlane.Type,
+            rego: currentPlane.Reg,
+            op: currentPlane.Op,
         }
-    }
-    else {
-        currentState =  {
+    } else {
+        currentState = {
             callsign: 'Not selected',
             altitude: 0,
             vSpeed: 0,
             hSpeed: 0,
             heading: 0,
-            distance: 0,
+            trak: 0,
             squawk: 0,
             engines: 'Not selected',
+            type: 'Not selected',
+            rego: `Not selected`,
+            Op: 'Not selected',
         }
     }
 
@@ -67,7 +70,6 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
-                
                 <Map
                     details={currentPlane}
                     setDetails={setCurrentPlane}
@@ -75,20 +77,19 @@ function App() {
                     setFlightDetailsVisible={setShowFlightDetails}
                 />
 
-                <MainLogo/>
+                <MainLogo />
 
-                < Settings />
+                <Settings />
 
-                {showFlightList ?
-                    <FlightList 
-                        setVisible={setShowFlightList} 
+                {showFlightList ? (
+                    <FlightList
+                        setVisible={setShowFlightList}
                         setDetails={setCurrentPlane}
                         setDetailsVisible={setShowFlightDetails}
-                    /> : 
-                    <FlightListButton 
-                        setVisible={setShowFlightList} 
                     />
-                }
+                ) : (
+                    <FlightListButton setVisible={setShowFlightList} />
+                )}
 
                 {showFlightDetails ? (
                     <FlightDetails

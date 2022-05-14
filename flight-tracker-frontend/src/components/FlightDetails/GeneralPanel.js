@@ -4,7 +4,8 @@ import getPlaneImage from '../../services/planeServices'
 
 // Shows General information about the plane.
 const GeneralPanel = ({ details }) => {
-    const planeImage = getPlaneImage(details.reg)
+    console.log(details)
+    const planeImage = getPlaneImage(details.rego)
 
     return (
         <div className="flightDetailsRow">
