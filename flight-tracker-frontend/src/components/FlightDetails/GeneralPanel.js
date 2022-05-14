@@ -26,9 +26,6 @@ const GeneralPanel = ({ details }) => {
                     <b>Heading:</b> {details.heading}&deg;
                 </Typography>
                 <Typography>
-                    <b>Distance:</b> {details.distance}km
-                </Typography>
-                <Typography>
                     <b>Squawk:</b> {details.squawk}
                 </Typography>
                 <Typography>
