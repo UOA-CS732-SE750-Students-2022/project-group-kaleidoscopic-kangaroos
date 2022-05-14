@@ -62,7 +62,8 @@ const FlightListRows = (props) => {
                     />
                 </ListItemAvatar>
                 <ListItemText
-                    style={{ color: 'white' }}
+                    type="subheading"
+                    style={{ color: 'white', left: '5' }}
                     primary={`${callsign} - ${op}`}
                 />
             </ListItemButton>

@@ -1,15 +1,20 @@
+import axios from 'axios'
+
 // Set the base URL for the airline images.
 const baseURL = 'https://airline.slim.kiwi/logos'
 // Set the default image.
 let imgLink = `${baseURL}/UNKNOWN.png`
 
 function checkURL(url) {
-    // if the image does not exist, it will set the image to the placeholder
-    const http = new XMLHttpRequest()
-    http.open('HEAD', url, false)
-    http.send()
-    if (http.status === 404) {
-        imgLink = `${baseURL}/UNKNOWN.png`
+    try {
+        axios.get(url).then((response) => {
+            if (response.status === 404) {
+                imgLink = `${baseURL}/UNKNOWN.png`
+            }
+        })
+        // console.log(response);
+    } catch (error) {
+        console.error(error)
     }
 }
 

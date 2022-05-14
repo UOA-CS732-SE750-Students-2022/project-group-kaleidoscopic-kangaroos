@@ -1,7 +1,7 @@
 import plane from '../images/plane-placeholder.png'
 
 const baseURL = `https://www.airport-data.com/api/ac_thumb.json?r=`
-
+const axios = require('axios').default
 // set the default image
 let imgLink = plane
 
@@ -23,9 +23,10 @@ function getPlaneImage(planeRego) {
 
     const JSONurl = `${baseURL}${planeRego}&n=1`
 
-    fetch(JSONurl)
+    axios
+        .get(JSONurl)
         .then((response) => {
-            console.log(response.text())
+            console.log(response)
         })
         .catch((error) => {
             console.log(error)
