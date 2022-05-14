@@ -2,12 +2,14 @@
 import { useState } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
+import useMediaQuery from '@mui/material/useMediaQuery'
 import Map from './components/Map/Map'
 import FlightDetails from './components/FlightDetails/FlightDetails'
 import Settings from './components/Settings/Settings'
 import FlightList from './components/FlightList/FlightList'
 import FlightListButton from './components/FlightListButton/FlightListButton'
 import MainLogo from './components/MainLogo/MainLogo'
+
 
 /**
  * Used to define the general color scheme for components.
@@ -29,6 +31,9 @@ function App() {
     const [showFlightDetails, setShowFlightDetails] = useState(false)
     // The current plane that is selected in the map or list.
     const [currentPlane, setCurrentPlane] = useState([])
+
+    // Used for responsiveness.
+    const isMobile = useMediaQuery('(max-width: 970px)');
 
     // The current plane that is being selected.
     let currentState;
@@ -89,9 +94,11 @@ function App() {
                         setVisible={setShowFlightList} 
                         setDetails={setCurrentPlane}
                         setDetailsVisible={setShowFlightDetails}
+                        fullWidth={isMobile}
                     /> : 
                     <FlightListButton 
-                        setVisible={setShowFlightList} 
+                        setVisible={setShowFlightList}
+                        text={isMobile ? "" : "Flight List"}
                     />
                 }
 
@@ -99,6 +106,7 @@ function App() {
                     <FlightDetails
                         details={currentState}
                         setVisible={setShowFlightDetails}
+                        fullWidth={isMobile}
                     />
                 ) : null}
             </div>

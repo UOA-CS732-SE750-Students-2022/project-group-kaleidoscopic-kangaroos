@@ -5,13 +5,10 @@ import {
 } from '@mui/material'
 import PlayAudio from 'react-simple-audio-player'
 
-import radioChannels from '../../data/atcRadio.json'
-
-
+import radioChannels from '../../data/atcRadio.json';
 
 // Shows radio information about the plane.
 const AtcRadioPanel = ({details}) => {
-    console.log(details)
     return (
         <div className="flightDetailsRow">
             <Container>
@@ -33,7 +30,7 @@ const AtcRadioPanel = ({details}) => {
                                 </Container>
                             );
                         }
-                        return(null);
+                        return(<p>No radio channel found</p>);
                     })
                     }
             </Container>
