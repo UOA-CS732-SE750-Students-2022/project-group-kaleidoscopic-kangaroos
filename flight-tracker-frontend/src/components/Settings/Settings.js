@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import './Settings.css'
 import Popup from '../Popup/Popup'
@@ -16,44 +16,34 @@ const Settings = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
- 
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  }
-  
-  return (
-    <div className="menuBackground">
-      <Button variant="contained" color="primary"
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        Menu
-      </Button>
-      <Menu
-        keepMounted
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        open={Boolean(anchorEl)}
-      >
-        
-        <MenuItem onClick={togglePopup}>About</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
-      </Menu>
-
-      
-    {isOpen && <Popup
-      content={<>
-        
-        <b>About</b>
-        <p>Kiwi Flight is a flight tracking company that displays aircraft and flight information in real-time on a map. Kiwi Flight offers flight data such as latitude and longitude positions, origins and destinations, flight numbers, aircraft types, altitudes, headings and speeds.</p>
-       
-      </>}
-      handleClose={togglePopup}
-    />}
-    </div>
-  );
+    return (
+      <div className="menuBackground">
+        <IconButton variant="contained" color="primary"
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          sx={{
+            fontSize: '30px', maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'
+          }}
+        >
+          ⚙️
+        </IconButton>
+        <Menu
+          keepMounted
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          open={Boolean(anchorEl)}
+          sx={{
+            top: '10px', left: '5px'
+          }}
+        >
+          <MenuItem onClick={handleClose}>Flight Information</MenuItem>
+          <MenuItem onClick={handleClose}>About</MenuItem>
+          <MenuItem onClick={handleClose}>Contact</MenuItem>
+          <MenuItem onClick={handleClose}>Settings</MenuItem>
+        </Menu>
+      </div>
+    );
 };
   
 export default Settings;
