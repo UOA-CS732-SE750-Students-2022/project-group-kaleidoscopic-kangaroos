@@ -2,6 +2,7 @@ import React from 'react'
 import { Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import getAllFlights from '../../services/flightServices'
+import getAirlineImage from '../../services/airlineServices'
 
 let allFlights = []
 
@@ -25,6 +26,8 @@ function Planes({ details, setDetails, visible, setVisible }) {
         getAllNodes()
     }
 
+    const imgLink = getAirlineImage(details.Callsign, details.OpIcao)
+
     return (
         <>
             {allFlights.map((item) =>
@@ -43,7 +46,21 @@ function Planes({ details, setDetails, visible, setVisible }) {
             src='/newicon2.png'>`,
                         })}
                     >
-                        <Popup>{item.Call}</Popup>
+                        <Popup>
+                            <img
+                                src={imgLink}
+                                alt={item.Op}
+                                className="planeImage"
+                            />
+                            <br />
+                            Callsign - {item.Call}
+                            <br />
+                            Altitude - {item.Alt}
+                            <br />
+                            Speed - {item.Spd}
+                            <br />
+                            {item.Mdl}
+                        </Popup>
                     </Marker>
                 ) : (
                     <Marker
