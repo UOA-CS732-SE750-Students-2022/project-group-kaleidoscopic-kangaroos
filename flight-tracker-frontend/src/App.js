@@ -34,6 +34,7 @@ function App() {
     let currentState;
 
     // Used to format plane data so that is usable in other components.
+    // console.log(currentPlane)
     if (showFlightDetails) {
         currentState = {
             callsign: currentPlane.Call,
@@ -44,6 +45,8 @@ function App() {
             distance: 18582.58,
             squawk: currentPlane.Sqk,
             engines: 'Twin turbo',
+            latitude: currentPlane.Lat,
+            longitude: currentPlane.Long
         }
     }
     else {
@@ -56,6 +59,8 @@ function App() {
             distance: 0,
             squawk: 0,
             engines: 'Not selected',
+            latitude: null,
+            longitude: null
         }
     }
 

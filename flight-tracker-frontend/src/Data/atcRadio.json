@@ -1,0 +1,12 @@
+[
+    {
+        "display_name": "Auckland Mandatory Broadcast Zone",
+        "display_freq": 120.4,
+        "location_limit_E": 175.3,
+        "location_limit_W": 174.4,
+        "location_limit_N": -36.69,
+        "location_limit_S": -37.3,
+        "stream_type": "audio/mpeg",
+        "stream_url": "https://radio.ad2.freeth.kiwi:8000/Waikato_Police_Rural_2"
+    }
+]
