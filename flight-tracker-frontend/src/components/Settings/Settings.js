@@ -17,7 +17,7 @@ const Settings = () => {
   
   return (
     <div className="menuBackground">
-      <Button
+      <Button variant="contained" color="primary"
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}

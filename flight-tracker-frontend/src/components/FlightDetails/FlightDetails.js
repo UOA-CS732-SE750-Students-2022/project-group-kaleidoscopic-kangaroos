@@ -20,9 +20,11 @@ import './FlightDetails.css'
  * Show the details for a selected flight.
  * @param {object} details provides the details for the selected plane.
  * @param {boolean} setVisible used to set the FlightDetails component invisible.
+ * @param {boolean} fullWidth is true when in table or mobile view, indicates the the 
+ * component should fit the width of the screen.
  * @returns the jsx for the component that will be rendered.
  */
-const FlightDetails = ({details, setVisible}) => {
+const FlightDetails = ({details, setVisible, fullWidth}) => {
     const [selectedPanel, setSelectedPanel] = useState("General");
 
     /**
@@ -57,7 +59,7 @@ const FlightDetails = ({details, setVisible}) => {
     return (
         <div>
             <Slide direction="up" in timeout={300}>
-                <Card className="flightDetailsDiv" elevation={0}>
+                <Card className="flightDetailsDiv" elevation={0} sx={{width: fullWidth ? "98.5%" : 500}}>
                     <div className="flightDetailsRow">
                         <Typography variant="h4">
                             Plane {details.callsign}
