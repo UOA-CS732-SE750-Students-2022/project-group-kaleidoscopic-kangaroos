@@ -92,7 +92,7 @@ const FlightList = ({ setVisible, setDetailsVisible, setDetails }) => {
     useEffect(() => {
         setInterval(() => {
             setLoading(true)
-        }, 100)
+        }, 2000)
     }, [])
 
     if (isLoading) {
