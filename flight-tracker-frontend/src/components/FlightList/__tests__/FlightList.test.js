@@ -2,6 +2,6 @@
 import {render} from '@testing-library/react'
 import FlightList from "../FlightList"
 
-it('Renders FlightList component correctly.', () => {
+it('Renders Flight List component correctly.', () => {
     const {queryByTestId} = render(<FlightList />);
 });
