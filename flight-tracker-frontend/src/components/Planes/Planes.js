@@ -4,6 +4,15 @@ import L from 'leaflet'
 import { getAllFlights, updateAllFlights } from '../../services/flightServices'
 import getAirlineImage from '../../services/airlineServices'
 
+/**
+ * Shows Planes on the world map. Also shows the current location of planes.
+ * @param {object} details the details of the currently selected plane.
+ * @param {function} setDetails the function used to change the selected plane.
+ * @param {boolean} setVisible a function that is used to make the FlightDetails component visible..
+ * @param {function} updateAllFlights used for update the current loaction of the flight. 
+ * @returns the jsx for the Planes component.
+ */
+
 let allFlights = []
 let lastDV = 0
 
@@ -33,6 +42,8 @@ function Planes({ details, setDetails, visible, setVisible }) {
     }
 
     const imgLink = getAirlineImage(details.Call, details.OpIcao)
+
+    // Render the component.
 
     return (
         <>
