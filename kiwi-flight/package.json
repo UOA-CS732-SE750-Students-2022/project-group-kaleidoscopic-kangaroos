@@ -1,6 +1,6 @@
 {
-  "name": "flight-tracker-frontend",
-  "version": "0.1.0",
+  "name": "kiwi-flight",
+  "version": "1.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",

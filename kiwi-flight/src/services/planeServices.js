@@ -16,7 +16,6 @@ function getPlaneImage(planeRego) {
             // Check if the image is available
             if (response.status === 200) {
                 imgLink = response.data.data[0].image
-                console.log(imgLink)
             } else {
                 imgLink = plane
             }
