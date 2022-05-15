@@ -1,31 +1,18 @@
 import { Container, Paper, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 import getPlaneImage from '../../services/planeServices'
-
-let fetchedPlaneImage = false
-let currentRego = ''
-let planeImage = ''
 
 /* eslint-disable arrow-body-style */
 
-// Stops Spamming the API for Images -- checks if the image has already been fetched according to the rego.
-function getImg(rego) {
-    if (fetchedPlaneImage === false) {
-        currentRego = rego
-        planeImage = getPlaneImage(rego)
-        console.log(planeImage)
-        fetchedPlaneImage = true
-    }
-
-    return planeImage
-}
-
 // Shows General information about the plane.
 const GeneralPanel = ({ details }) => {
-    if (details.rego !== currentRego) {
-        fetchedPlaneImage = false
-        currentRego = details.rego
-        getImg(details.rego)
-    }
+    const [planeImage, setPlaneImage] = useState('')
+
+    useEffect(() => {
+        const image = getPlaneImage(details.rego)
+        setPlaneImage(image)
+    }, [details.rego])
+
     return (
         <div className="flightDetailsRow">
             <Paper variant="outlined" className="planeImageContainer">
