@@ -9,7 +9,7 @@ import getAirlineImage from '../../services/airlineServices'
  * @param {object} details the details of the currently selected plane.
  * @param {function} setDetails the function used to change the selected plane.
  * @param {boolean} setVisible a function that is used to make the FlightDetails component visible..
- * @param {function} updateAllFlights used for update the current loaction of the flight. 
+ * @param {function} updateAllFlights used for update the current loaction of the flight.
  * @returns the jsx for the Planes component.
  */
 
@@ -60,7 +60,7 @@ function Planes({ details, setDetails, visible, setVisible }) {
             style="transform: rotate(${item.Trak}deg);"
             height="50" 
             width="50"
-            src='/newicon2.png'>`,
+            src='/type/${details.Species}.png'>`,
                         })}
                     >
                         <Popup>
@@ -101,7 +101,7 @@ function Planes({ details, setDetails, visible, setVisible }) {
             style="transform: rotate(${item.Trak}deg);"
             height="50" 
             width="50"
-            src='/newicon.png'>`,
+            src='/type/${details.Species}s.png'>`,
                         })}
                     >
                         <Popup>{item.Call}</Popup>
