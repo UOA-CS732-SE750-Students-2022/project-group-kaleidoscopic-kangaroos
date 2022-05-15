@@ -117,7 +117,9 @@ const FlightDetails = ({ details, setVisible, fullWidth }) => {
                         <ToggleButton value="Spatial">Spatial</ToggleButton>
                         <ToggleButton value="Speed">Speed</ToggleButton>
                         <ToggleButton value="Altitude">Altitude</ToggleButton>
-                        <ToggleButton value="ATC">ATC Radio</ToggleButton>
+                        {fullWidth ? <ToggleButton value="ATC">ATC</ToggleButton> : 
+                        <ToggleButton value="ATC">ATC Radio</ToggleButton>}
+                        
                     </ToggleButtonGroup>
                 </Card>
             </Slide>
