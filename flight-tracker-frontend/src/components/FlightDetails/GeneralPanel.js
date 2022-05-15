@@ -1,11 +1,31 @@
 import { Container, Paper, Typography } from '@mui/material'
 import getPlaneImage from '../../services/planeServices'
 
+let fetchedPlaneImage = false
+let currentRego = ''
+let planeImage = ''
+
 /* eslint-disable arrow-body-style */
+
+// Stops Spamming the API for Images -- checks if the image has already been fetched according to the rego.
+function getImg(rego) {
+    if (fetchedPlaneImage === false) {
+        currentRego = rego
+        planeImage = getPlaneImage(rego)
+        console.log(planeImage)
+        fetchedPlaneImage = true
+    }
+
+    return planeImage
+}
 
 // Shows General information about the plane.
 const GeneralPanel = ({ details }) => {
-    const planeImage = getPlaneImage(details.rego)
+    if (details.rego !== currentRego) {
+        fetchedPlaneImage = false
+        currentRego = details.rego
+        getImg(details.rego)
+    }
     return (
         <div className="flightDetailsRow">
             <Paper variant="outlined" className="planeImageContainer">
