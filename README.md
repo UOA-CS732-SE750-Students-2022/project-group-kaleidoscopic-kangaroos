@@ -47,7 +47,7 @@ Due to CORS policies, the live ATC audio function will not work when the project
 # Running The Project
 To run the project:
 1) make sure that NPM is installed (should be installed if you have Node.js on your machine).
-2) navigate to the flight-tracker-frontend directory.
+2) navigate to the kiwi-flight directory.
 3) open the terminal and execute the following command to install dependencies: `npm install` (Give this a few minutes to install the dependancies)
 4) execute the following command to run the project: `npm start`
 5) open a browser, and navigate to http://127.0.0.1:3000
