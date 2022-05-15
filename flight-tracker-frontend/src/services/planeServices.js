@@ -1,6 +1,6 @@
 import plane from '../images/plane-placeholder.png'
 
-const baseURL = `https://www.airport-data.com/api/ac_thumb.json?r=`
+const baseURL = `https://cors.slim.kiwi/airport-data.com/api/ac_thumb.json?r=`
 const axios = require('axios').default
 // set the default image
 let imgLink = plane
@@ -15,13 +15,14 @@ function getPlaneImage(planeRego) {
             // console.log(response.data.image)
             // Check if the image is available
             if (response.status === 200) {
-                imgLink = response.data.image
+                imgLink = response.data.data[0].image
+                console.log(imgLink)
             } else {
                 imgLink = plane
             }
         })
         // eslint-disable-next-line no-unused-vars
-        .catch(error => plane)
+        .catch((error) => plane)
 
     return imgLink
 }
