@@ -20,7 +20,8 @@ function getPlaneImage(planeRego) {
                 imgLink = plane
             }
         })
-        .catch(() => plane)
+        // eslint-disable-next-line no-unused-vars
+        .catch(error => plane)
 
     return imgLink
 }

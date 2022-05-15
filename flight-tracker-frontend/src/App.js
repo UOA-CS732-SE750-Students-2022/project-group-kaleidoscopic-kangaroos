@@ -35,40 +35,6 @@ function App() {
     // Used for responsiveness.
     const isMobile = useMediaQuery('(max-width: 970px)');
 
-    // The current plane that is being selected.
-    let currentState;
-
-    // Used to format plane data so that is usable in other components.
-    // console.log(currentPlane)
-    if (showFlightDetails) {
-        currentState = {
-            callsign: currentPlane.Call,
-            altitude: Math.round(currentPlane.Alt / 3.2808),
-            vSpeed: 20,
-            hSpeed: Math.round(currentPlane.Spd * 1.60934),
-            heading: currentPlane.Trak,
-            distance: 18582.58,
-            squawk: currentPlane.Sqk,
-            engines: 'Twin turbo',
-            latitude: currentPlane.Lat,
-            longitude: currentPlane.Long
-        }
-    }
-    else {
-        currentState =  {
-            callsign: 'Not selected',
-            altitude: 0,
-            vSpeed: 0,
-            hSpeed: 0,
-            heading: 0,
-            distance: 0,
-            squawk: 0,
-            engines: 'Not selected',
-            latitude: null,
-            longitude: null
-        }
-    }
-
     /*
     Renders the components.
     Flight List is only displayed when the show flight list button is clicked.
@@ -105,7 +71,7 @@ function App() {
 
                 {showFlightDetails ? (
                     <FlightDetails
-                        details={currentState}
+                        details={currentPlane}
                         setVisible={setShowFlightDetails}
                         fullWidth={isMobile}
                     />

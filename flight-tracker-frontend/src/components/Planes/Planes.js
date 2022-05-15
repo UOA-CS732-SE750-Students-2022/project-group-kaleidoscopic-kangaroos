@@ -77,7 +77,9 @@ function Planes({ details, setDetails, visible, setVisible }) {
                         eventHandlers={{
                             click: () => {
                                 setDetails(item)
-                                setVisible(true)
+                                if (!visible) {
+                                    setVisible(true)
+                                }
                             },
                         }}
                         icon={L.divIcon({
