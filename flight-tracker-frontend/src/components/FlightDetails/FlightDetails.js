@@ -8,12 +8,13 @@ import {
     Typography,
 } from '@mui/material'
 import { VscChromeClose } from 'react-icons/vsc';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import GeneralPanel from './GeneralPanel'
 import SpatialPanel from './SpatialPanel'
 import SpeedPanel from './SpeedPanel'
 import AltitudePanel from './AltitudePanel'
 import AtcRadioPanel from './AtcRadioPanel'
+import { getFlight } from '../../services/flightServices'
 import './FlightDetails.css'
 
 /**
@@ -26,7 +27,7 @@ import './FlightDetails.css'
  */
 const FlightDetails = ({details, setVisible, fullWidth}) => {
     const [selectedPanel, setSelectedPanel] = useState("General");
-    const [flightInformation] = useState({
+    const [flightInformation, setFlightInformation] = useState({
         callsign: details.Call,
         altitude: Math.round(details.Alt / 3.2808),
         vSpeed: 20,
@@ -38,6 +39,30 @@ const FlightDetails = ({details, setVisible, fullWidth}) => {
         latitude: details.Lat,
         longitude: details.Long
     });
+
+    useEffect(() => {
+        const updateFlightInfo = async() => {
+            const newFlightDetails = (await getFlight(details.Icao)).acList[0]
+            console.log(newFlightDetails)
+
+            setFlightInformation({
+                callsign: newFlightDetails.Call,
+                altitude: Math.round(newFlightDetails.Alt / 3.2808),
+                vSpeed: 20,
+                hSpeed: Math.round(newFlightDetails.Spd * 1.60934),
+                heading: newFlightDetails.Trak,
+                distance: 18582.58,
+                squawk: newFlightDetails.Sqk,
+                engines: 'Twin turbo',
+                latitude: newFlightDetails.Lat,
+                longitude: newFlightDetails.Long
+            })
+        }
+
+        const updateFlightInterval = setInterval(() => updateFlightInfo(), 1000)
+
+        return () => clearInterval(updateFlightInterval);
+    }, [details])
 
     /**
      * Used to change the currently selected panel.
