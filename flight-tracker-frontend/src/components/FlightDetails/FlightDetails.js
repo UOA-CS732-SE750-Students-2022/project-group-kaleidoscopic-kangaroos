@@ -8,7 +8,7 @@ import {
     Typography,
 } from '@mui/material'
 import { VscChromeClose } from 'react-icons/vsc';
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import GeneralPanel from './GeneralPanel'
 import SpatialPanel from './SpatialPanel'
 import SpeedPanel from './SpeedPanel'
@@ -26,17 +26,17 @@ import './FlightDetails.css'
  */
 const FlightDetails = ({details, setVisible, fullWidth}) => {
     const [selectedPanel, setSelectedPanel] = useState("General");
-    const [flightInformation, setFlightInformation] = useState({
-        callsign: 'Not selected',
-        altitude: 0,
-        vSpeed: 0,
-        hSpeed: 0,
-        heading: 0,
-        distance: 0,
-        squawk: 0,
-        engines: 'Not selected',
-        latitude: null,
-        longitude: null
+    const [flightInformation] = useState({
+        callsign: details.Call,
+        altitude: Math.round(details.Alt / 3.2808),
+        vSpeed: 20,
+        hSpeed: Math.round(details.Spd * 1.60934),
+        heading: details.Trak,
+        distance: 18582.58,
+        squawk: details.Sqk,
+        engines: 'Twin turbo',
+        latitude: details.Lat,
+        longitude: details.Long
     });
 
     /**
@@ -47,28 +47,6 @@ const FlightDetails = ({details, setVisible, fullWidth}) => {
     const handleSelectedPanel = (event, panelName) => {
         setSelectedPanel(panelName);
     }
-
-    useEffect(() => {
-        const updateFlightInformation = async () => {
-            const currentPlane = details;
-        
-            setFlightInformation({
-                callsign: currentPlane.Call,
-                altitude: Math.round(currentPlane.Alt / 3.2808),
-                vSpeed: 20,
-                hSpeed: Math.round(currentPlane.Spd * 1.60934),
-                heading: currentPlane.Trak,
-                distance: 18582.58,
-                squawk: currentPlane.Sqk,
-                engines: 'Twin turbo',
-                latitude: currentPlane.Lat,
-                longitude: currentPlane.Long
-            })
-        }
-
-        updateFlightInformation();
-        
-    }, [])
 
     let contents;
 
