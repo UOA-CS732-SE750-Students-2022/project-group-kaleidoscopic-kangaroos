@@ -52,6 +52,41 @@ To run the project:
 4) execute the following command to run the project: `npm start`
 5) open a browser, and navigate to http://127.0.0.1:3000
 
+
+# Further Data Inputs
+
+- **Flight Informaion** provided by Aircraft List API
+- **Airline Logos** orginally provided by Github repo _airline-logos_ from @sexym0nk3y
+- **Plane Photos** provided by airport-data.com
+
+### Aircraft List API
+baseURL -  [https://aircraft.freeth.kiwi/VirtualRadar/AircraftList.json](Here)
+
+When working with data that has come from the base server API, the required documentation can be found here: [https://www.virtualradarserver.co.uk/Documentation/Formats/AircraftList.aspx](https://www.virtualradarserver.co.uk/Documentation/Formats/AircraftList.aspx)
+
+This doc should be read by anyone that is using data from this API
+
+### Airline Logo API
+baseURL -  [https://airline.slim.kiwi](Here)
+
+For this implementation we are using a Forked version of _airline-logos_ from @sexym0nk3y.
+
+The files have all been labed inline with Airline ICAO codes and additional Airlines with IATA codes have also been added. To access a logo use the following file structure:
+```
+    [baseURL]/logo/[ICAO].png
+    [baseURL]/company/[companyname].png
+```
+
+### Plane Image API
+baseURL - https://cors.slim.kiwi/airport-data.com/api/ac_thumb.json?r=(Here)
+
+For this implentation we have used Proxy to access the Airport-data.com API. This was done to overcome Access-Control limitaions.
+
+Use of this API is simple, all you need to to prove the Airplanes Registration number and it will return verified photos of the Aircraft itself. You can also denote the n value to limit how many images are returned. In our case we have defaulted to 1 image.
+```
+  [baseURL][planeRego]&n=1
+```
+
 # Wiki
 Check the wiki for [more details](https://github.com/UOA-CS732-SE750-Students-2022/project-group-kaleidoscopic-kangaroos/wiki).
 
