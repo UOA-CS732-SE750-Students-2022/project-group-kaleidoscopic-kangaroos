@@ -11,6 +11,14 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 
+/**
+ * A button that can be clicked to show the Menu list . 
+ * @param {boolean} togglePopup a function that is used to make "About" Menu item popup visible
+ * @param {boolean} handleClose the function used to make popup unvisible
+ * @param {boolean} handleClick the function used to make Menu popup visible
+ * @returns the jsx for the Settings component.
+ */
+
 let title
 
 let description
@@ -34,6 +42,8 @@ const Settings = () => {
         setIsOpen(!isOpen)
     }
 
+   // Render the component.
+    
     return (
         <div className="menuBackground">
             <Dialog
