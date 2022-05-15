@@ -8,7 +8,7 @@ import {
     Typography,
 } from '@mui/material'
 import { VscChromeClose } from 'react-icons/vsc';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import GeneralPanel from './GeneralPanel'
 import SpatialPanel from './SpatialPanel'
 import SpeedPanel from './SpeedPanel'
@@ -26,6 +26,18 @@ import './FlightDetails.css'
  */
 const FlightDetails = ({details, setVisible, fullWidth}) => {
     const [selectedPanel, setSelectedPanel] = useState("General");
+    const [flightInformation, setFlightInformation] = useState({
+        callsign: 'Not selected',
+        altitude: 0,
+        vSpeed: 0,
+        hSpeed: 0,
+        heading: 0,
+        distance: 0,
+        squawk: 0,
+        engines: 'Not selected',
+        latitude: null,
+        longitude: null
+    });
 
     /**
      * Used to change the currently selected panel.
@@ -36,23 +48,45 @@ const FlightDetails = ({details, setVisible, fullWidth}) => {
         setSelectedPanel(panelName);
     }
 
+    useEffect(() => {
+        const updateFlightInformation = async () => {
+            const currentPlane = details;
+        
+            setFlightInformation({
+                callsign: currentPlane.Call,
+                altitude: Math.round(currentPlane.Alt / 3.2808),
+                vSpeed: 20,
+                hSpeed: Math.round(currentPlane.Spd * 1.60934),
+                heading: currentPlane.Trak,
+                distance: 18582.58,
+                squawk: currentPlane.Sqk,
+                engines: 'Twin turbo',
+                latitude: currentPlane.Lat,
+                longitude: currentPlane.Long
+            })
+        }
+
+        updateFlightInformation();
+        
+    }, [])
+
     let contents;
 
     // Decide which panel to display.
     if (selectedPanel === "General") {
-        contents = <GeneralPanel details={details} />;
+        contents = <GeneralPanel details={flightInformation} />;
     }
     else if (selectedPanel === "Spatial") {
-        contents = <SpatialPanel details={details} />;
+        contents = <SpatialPanel details={flightInformation} />;
     }
     else if (selectedPanel === "Speed") {
-        contents = <SpeedPanel details={details} />;
+        contents = <SpeedPanel details={flightInformation} />;
     }
     else if (selectedPanel === "Altitude") {
-        contents = <AltitudePanel details={details} />;
+        contents = <AltitudePanel details={flightInformation} />;
     }
     else if (selectedPanel === "ATC") {
-        contents = <AtcRadioPanel details={details} />;
+        contents = <AtcRadioPanel details={flightInformation} />;
     }
 
     // Render the components.
@@ -62,7 +96,7 @@ const FlightDetails = ({details, setVisible, fullWidth}) => {
                 <Card className="flightDetailsDiv" elevation={0} sx={{width: fullWidth ? "98.5%" : 500}}>
                     <div className="flightDetailsRow">
                         <Typography variant="h4">
-                            Plane {details.callsign}
+                            Plane {details.Call}
                         </Typography>
                         <IconButton color="primary" size='large' onClick={() => setVisible(false)}>
                             <VscChromeClose />
