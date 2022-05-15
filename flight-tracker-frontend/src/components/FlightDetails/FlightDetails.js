@@ -30,12 +30,10 @@ const FlightDetails = ({details, setVisible, fullWidth}) => {
     const [flightInformation, setFlightInformation] = useState({
         callsign: details.Call,
         altitude: Math.round(details.Alt / 3.2808),
-        vSpeed: 20,
+        vSpeed: Math.round(details.Vsi * 0.3048),
         hSpeed: Math.round(details.Spd * 1.60934),
         heading: details.Trak,
-        distance: 18582.58,
-        squawk: details.Sqk,
-        engines: 'Twin turbo',
+        squawk: details.Engines,
         latitude: details.Lat,
         longitude: details.Long
     });
@@ -43,17 +41,15 @@ const FlightDetails = ({details, setVisible, fullWidth}) => {
     useEffect(() => {
         const updateFlightInfo = async() => {
             const newFlightDetails = (await getFlight(details.Icao)).acList[0]
-            console.log(newFlightDetails)
 
             setFlightInformation({
                 callsign: newFlightDetails.Call,
                 altitude: Math.round(newFlightDetails.Alt / 3.2808),
-                vSpeed: 20,
+                vSpeed: Math.round(newFlightDetails.Vsi * 0.3048),
                 hSpeed: Math.round(newFlightDetails.Spd * 1.60934),
                 heading: newFlightDetails.Trak,
-                distance: 18582.58,
                 squawk: newFlightDetails.Sqk,
-                engines: 'Twin turbo',
+                engines: newFlightDetails.Engines,
                 latitude: newFlightDetails.Lat,
                 longitude: newFlightDetails.Long
             })

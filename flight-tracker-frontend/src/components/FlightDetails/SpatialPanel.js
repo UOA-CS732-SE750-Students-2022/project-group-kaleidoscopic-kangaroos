@@ -10,9 +10,6 @@ const SpatialPanel = ({details}) => {
         <div className="flightDetailsRow">
             <Container>
                 <Typography>
-                    <b>Distance:</b> {details.distance}km
-                </Typography>
-                <Typography>
                     <b>Heading:</b> {details.heading}&deg;
                 </Typography>
                 <Typography>
